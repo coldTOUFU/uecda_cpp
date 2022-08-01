@@ -1,0 +1,6 @@
+main
+.vscode
+*.o
+*.log
+
+tndhm_devkit_c-20180826/

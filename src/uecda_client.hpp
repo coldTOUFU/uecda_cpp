@@ -94,4 +94,7 @@ class UECdaClient {
   void sendCommunicationBody(CommunicationBody src);
 };
 
+const std::string UECdaClient::kDefaultServerHostname = "127.0.0.1";
+const std::string UECdaClient::kDefaultPlayerName = "sample";
+
 #endif  // UECDA_CLIENT_HPP_

@@ -1,8 +1,5 @@
 #include "uecda_client.hpp"
 
-const std::string UECdaClient::kDefaultServerHostname = "127.0.0.1";
-const std::string UECdaClient::kDefaultPlayerName = "sample";
-
 UECdaClient::UECdaClient(std::string pname, int port, std::string sname) {
   this->server_hostname_ = sname;
   this->port_ = port;

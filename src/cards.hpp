@@ -1,8 +1,10 @@
 #ifndef CARDS_HPP_
 #define CARDS_HPP_
 
-#include <cstdint>
+#include <unistd.h>
 #include <vector>
+
+#include "uecda_common.hpp"
 
 class Cards {
  public:
@@ -17,7 +19,7 @@ class Cards {
   static constexpr int kClover = 3;
 
   /* 配列形式のカードから生成。 */
-  Cards(uint16_t src[8][15]);
+  Cards(uecda_common::CommunicationBody src);
 
   /* ビットカードから生成。 */
   Cards(bitcards src) { this->cards = src; }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 #include <iostream>
 
@@ -9,6 +8,7 @@
 #include "../hand.hpp"
 #include "../table.cpp"
 #include "../uecda_client.hpp"
+#include "../uecda_common.hpp"
 #include "select_hand.hpp"
 
 int main(int argc, char* argv[]) {
@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
   /* ラウンドの繰り返し */
   while (!is_game_end) {
     is_round_end = false;
-    UECdaClient::CommunicationBody dealt_body = {{}};
-    UECdaClient::CommunicationBody table_body = {{}};
+    uecda_common::CommunicationBody dealt_body = {{}};
+    uecda_common::CommunicationBody table_body = {{}};
 
     /* 交換前の手札を受け取る */
     client->receiveMyInitialCards(dealt_body);
@@ -46,8 +46,8 @@ int main(int argc, char* argv[]) {
       std::vector<Hand*> submission_hands = select_change_hands(&hands);
 
       /* 提出用配列に着手を移す */
-      UECdaClient::CommunicationBody submission_body1 = {{}};
-      UECdaClient::CommunicationBody submission_body2 = {{}};
+      uecda_common::CommunicationBody submission_body1 = {{}};
+      uecda_common::CommunicationBody submission_body2 = {{}};
       submission_hands[0]->putCards(submission_body1);
       if (qty_to_change >= 2) {
         submission_hands[1]->putCards(submission_body2);
@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
         Hand* submission_hand = select_hand(&hands, table_hand, table);
 
         /* 提出用配列に着手を移す */
-        UECdaClient::CommunicationBody submission_body = {{}};
+        uecda_common::CommunicationBody submission_body = {{}};
         if (submission_hand != NULL) {  // NULLならパス
           submission_hand->putCards(submission_body);
         }

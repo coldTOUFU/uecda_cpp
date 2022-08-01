@@ -13,11 +13,10 @@
 #include <iostream>
 
 #include "error/uecda_client_error.hpp"
+#include "uecda_common.hpp"
 
 class UECdaClient {
  public:
-  using CommunicationBody = u_int16_t[8][15];
-
   enum class GAME_FINISH_STATE { kContinue, kRoundFinish, kGameFinish };
 
   UECdaClient(std::string pname = kDefaultPlayerName,
@@ -37,22 +36,22 @@ class UECdaClient {
   }
 
   /* サーバからラウンド開始時の手札を受け取る。 */
-  void receiveMyInitialCards(CommunicationBody dst);
+  void receiveMyInitialCards(uecda_common::CommunicationBody dst);
 
   /* カード交換時のカードの提出 */
-  void sendExchangeCards(CommunicationBody cards);
+  void sendExchangeCards(uecda_common::CommunicationBody cards);
 
   /* カードを受け取る。 */
-  void receiveMyCards(CommunicationBody dst);
+  void receiveMyCards(uecda_common::CommunicationBody dst);
 
   /* カードを提出し受理されたか否かを返す */
-  bool sendSubmissionCards(CommunicationBody src);
+  bool sendSubmissionCards(uecda_common::CommunicationBody src);
 
   //ラウンドの最後にゲームか終ったかを、サーバから受けとりその値を返す。
   GAME_FINISH_STATE receiveGameFinishState(void);
 
   /* 場札を受け取る */
-  void receiveTableCards(CommunicationBody dst);
+  void receiveTableCards(uecda_common::CommunicationBody dst);
 
  private:
   static constexpr int kProtocolVersion = 20070;
@@ -70,7 +69,7 @@ class UECdaClient {
   int sockfd_;
   struct sockaddr_in client_addr_;
   std::string server_hostname_;
-  uint16_t port_;
+  int port_;
   std::string player_name_;
 
   /* ソケットの初期化を行う。 */
@@ -85,16 +84,13 @@ class UECdaClient {
   }
 
   /* クライアントの情報を送信。 */
-  void sendClientProfile(std::string user_name);
+  void sendClientProfile();
 
   /* サーバからカードを受け取ってdst_tableに埋め込む。 */
-  void receiveCommunicationBody(CommunicationBody dst);
+  void receiveCommunicationBody(uecda_common::CommunicationBody dst);
 
   /* サーバからカードを受け取ってdst_tableに埋め込む。 */
-  void sendCommunicationBody(CommunicationBody src);
+  void sendCommunicationBody(uecda_common::CommunicationBody src);
 };
-
-const std::string UECdaClient::kDefaultServerHostname = "127.0.0.1";
-const std::string UECdaClient::kDefaultPlayerName = "sample";
 
 #endif  // UECDA_CLIENT_HPP_

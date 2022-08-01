@@ -1,11 +1,11 @@
 #ifndef TABLE_CPP_
 #define TABLE_CPP_
 
-#include <cstdint>
+#include "uecda_common.hpp"
 
 class Table {
  public:
-  Table(uint16_t src[8][15]) {
+  Table(uecda_common::CommunicationBody src) {
     this->is_my_turn = src[5][2];
     this->is_start_of_trick = src[5][4];
     this->is_lock = src[5][7];

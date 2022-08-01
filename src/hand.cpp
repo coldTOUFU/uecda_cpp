@@ -1,6 +1,18 @@
 #include "hand.hpp"
 
-Hand::Hand(uint16_t src[8][15]) {
+const int Hand::kPairFilterSize[4] = {4, 6, 4, 1};
+const Cards::bitcards Hand::pairFilters[4][6] = {
+    {1, 32768, 1073741824, 35184372088832}, /* 1枚用。 */
+    {32769, 1073741825, 35184372088833, 1073774592, 35184372121600,
+     35185445830656}, /* 2枚用。4つから2つ選ぶから6通り。 */
+    {1073774593, 35184372121601, 35185445830657,
+     35185445863424}, /* 3枚用。4つから3つ選ぶから4通り。 */
+    {35185445863425}  /* 4枚用。 */
+};
+const Cards::bitcards Hand::sequenceFilters[14] = {
+    1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383};
+
+Hand::Hand(uecda_common::CommunicationBody src) {
   Cards::bitcards c = (Cards::bitcards)0;
   Cards::bitcards j = (Cards::bitcards)0;
 
@@ -84,7 +96,7 @@ void Hand::pushHands(Cards *src, std::vector<Hand*> *hand_vec) {
   }
 }
 
-void Hand::putCards(uint16_t dst[8][15]) {
+void Hand::putCards(uecda_common::CommunicationBody dst) {
   Cards::bitcards src = this->cards->getCard();
   Cards::bitcards src_joker = this->joker->getCard();
 

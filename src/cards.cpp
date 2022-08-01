@@ -1,6 +1,6 @@
 #include "cards.hpp"
 
-Cards::Cards(uint16_t src[8][15]) {
+Cards::Cards(uecda_common::CommunicationBody src) {
   cards = 0;
 
   /* Joker。 */

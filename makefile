@@ -15,4 +15,4 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 clean:
-	rm -f ./out/main ./out/**/*.o ./out/*.o
+	rm -f ./out/main ./out/obj/**/*.o ./out/obj/*.o

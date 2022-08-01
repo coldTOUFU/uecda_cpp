@@ -10,7 +10,7 @@
 ユーザは、自分の手札をこのインスタンスで保持できます。
 ユーザに想定されるのは、手札配列を渡してインスタンスを作成し、必要に応じてHandクラスに渡すことのみです。
 
-`Cards(int src[8][15])`
+`Cards(uecda_common::CommunicationBody src)`
 使い道(ユーザ): 自分の手札からCardsインスタンスを作成。
 
 `Cards(bitcards src)`
@@ -42,7 +42,7 @@
 Cardsクラスとの違いは、Cardsが配列表現のみから得られる情報しか扱わないのに対し、
 Handクラスでは大貧民のルールに基づく情報を扱える点にあります。
 
-`Hand(int src[8][15])`
+`Hand(uecda_common::CommunicationBody src)`
 使い道(ユーザ): 合法手であることの判定などに用いるため、場の手からHandインスタンスを作成。
 
 `Hand(Cards::bitcards src, Cards::bitcards joker_src, HandSummary *hs)`
@@ -57,7 +57,7 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 `static void pushHands(Cards *src, std::vector<Hand*> *hand_vec)`
 使い道(ユーザ): 手札から生成したCardsインスタンスをもとに、手の集合を配列に書き込む。このとき合法かは問わない。
 
-`void putCards(int dst[8][15])`
+`void putCards(uecda_common::CommunicationBody dst)`
 使い道(ユーザ): この手を通信に用いられるカード表現として配列に書き込む。
 
 ### hand_summary
@@ -84,7 +84,7 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 ### table
 場の情報を配列から読み込み、保持するクラス。
 
-`Table(uint16_t src[8][15])`
+`Table(uecda_common::CommunicationBody src)`
 使い道(ユーザ): サーバから送られた場の情報を含む配列から、
 必要な情報を読み取る。
 
@@ -119,20 +119,26 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 `void exitGame()`
 使い道(ユーザ): サーバとの接続を終える。
 
-`void receiveMyInitialCards(CommunicationBody dst)`
+`void receiveMyInitialCards(uecda_common::CommunicationBody dst)`
 使い道(ユーザ): サーバからラウンド開始時の手札を受け取る。内容は交換実行前のものになっている。
 
-void sendExchangeCards(CommunicationBody cards);
+`void sendExchangeCards(uecda_common::CommunicationBody cards)`
 使い道(ユーザ): 交換するカードを提出する。富豪以上の場合のみ実行する。
 
-void receiveMyCards(CommunicationBody dst);
+`void receiveMyCards(uecda_common::CommunicationBody dst)`
 使い道（ユーザ): サーバから自分の手札を受け取る。
 
-bool sendSubmissionCards(CommunicationBody src);
+`bool sendSubmissionCards(uecda_common::CommunicationBody src)`
 使い道（ユーザ): カードを提出し受理されたか否かを受け取る。
 
-GAME_FINISH_STATE receiveGameFinishState(void);
+`GAME_FINISH_STATE receiveGameFinishState(void)`
 使い道(ユーザ): ラウンドの最後にゲームか終ったかをサーバから受けとりその値を返す。
 
-`void receiveTable(CommunicationBody dst)`
+`void receiveTable(uecda_common::CommunicationBody dst)`
 使い道(ユーザ): 場札を受け取る。
+
+### uecda_common
+広い範囲のプログラムで利用されるUECdaに関する定義。
+
+`CommunicationBody`
+サーバが扱う通信用の配列は4バイトなので、32ビット整数型の配列をこの型で定義。

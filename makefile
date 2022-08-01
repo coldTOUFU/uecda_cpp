@@ -6,7 +6,7 @@ OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
 TARGET	= $(OUTDIR)/main
 
 CC		= g++
-CFLAGS	= -Wall -O2
+CFLAGS	= -Wall -O0
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^

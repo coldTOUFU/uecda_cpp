@@ -2,6 +2,7 @@
 #define CARDS_HPP_
 
 #include <unistd.h>
+#include <iostream>
 #include <vector>
 
 #include "uecda_common.hpp"
@@ -44,6 +45,12 @@ class Cards {
 
   /* 最強のカードを15bit形式で返す。 */
   bitcards strongestOrder();
+
+  /* デバッグ出力用に配列にカードを埋め込む。 */
+  void putCards(uecda_common::CommunicationBody dst);
+
+  /* デバッグ用に与えられたカードを出力。 */
+  static void printCards(uecda_common::CommunicationBody src);
 
  private:
   bitcards cards;

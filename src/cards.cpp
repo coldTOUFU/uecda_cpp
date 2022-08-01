@@ -112,3 +112,55 @@ Cards::bitcards Cards::strongestOrder() {
   }
   return tmp;
 }
+
+void Cards::putCards(uecda_common::CommunicationBody dst) {
+  bitcards src = this->cards;
+
+  /* Joker以外の各札。 */
+  for (int i = 3; i >= 0; i--) {
+    for (int j = 14; j >= 0; j--) {
+      dst[i][j] = src % 2;
+      src >>= 1;
+    }
+  }
+  /* Joker。 */
+  dst[4][1] = (src % 2) * 2;
+}
+
+
+void Cards::printCards(uecda_common::CommunicationBody src) {
+  std::cout << " |  * |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |  J |  Q |  K |  1 |  2 |  * |\n"
+               "-----------------------------------------------------------------------------\n";
+  for (int suit = 0; suit < 5; suit++) {
+    switch (suit) {
+      case Cards::kSpade:
+        std::cout << "S|";
+        break;
+      case Cards::kHeart:
+        std::cout << "H|";
+        break;
+      case Cards::kDiamond:
+        std::cout << "D|";
+        break;
+      case Cards::kClover:
+        std::cout << "C|";
+        break;
+      default:
+        std::cout << "*|";
+        break;
+    }
+    for (int order = 0; order < 15; order++) {
+      std::cout << "  ";
+      if (src[suit][order] == 1) {
+        std::cout << 1;
+      } else if (src[suit][order] == 2) {
+        std::cout << 2;
+      } else {
+        std:: cout << " ";
+      }
+      std::cout << " |";
+    }
+    std::cout << std::endl;
+    std::cout << "-----------------------------------------------------------------------------" << std::endl;
+  }
+}

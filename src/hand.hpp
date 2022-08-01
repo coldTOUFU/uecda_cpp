@@ -34,6 +34,16 @@ class Hand {
   /* 与えられた配列に手の構成カードを置く。 */
   void putCards(uecda_common::CommunicationBody dst);
 
+  /* デバッグ用に手を出力。 */
+  void printHand() {
+    uecda_common::CommunicationBody src = {{}};
+    this->putCards(src);
+    std::cout << std::endl;
+    std::cout << "カードの種類: " << ((this->summary->card_type == Cards::CARD_TYPES::kPair) ? "枚数型" : "階段") << std::endl;
+    std::cout << "カードの枚数: " << this->summary->quantity << std::endl;
+    Cards::printCards(src);
+  }
+
  private:
   static const int kPairFilterSize[4];
   static const Cards::bitcards pairFilters[4][6];

@@ -37,6 +37,12 @@
 `bitcards strongestOrder()`
 使い道(内部): Handで最強のカードの位置を得る。
 
+`void Cards::putCards(uecda_common::CommunicationBody dst)`
+使い道(ユーザ): デバッグ用に、カード表現をよりユーザが扱いやすい配列表現にする。
+
+`static void Cards::printCards(uecda_common::CommunicationBody src)`
+使い道(ユーザ): デバッグ用に、与えられたカード表現を出力する。
+
 ### hand
 役として成り立つカード集合をCardsインスタンスで保持するHandクラスが定義されています。
 Cardsクラスとの違いは、Cardsが配列表現のみから得られる情報しか扱わないのに対し、

@@ -1,3 +1,22 @@
+## 環境
+
+### テスト環境
+GoogleTestを使っています。利用する場合、GoogleTestをインストールしてください。
+
+以下が参考になります。実行には`cmake`と`ninja`が必要です。
+
+```
+wget https://github.com/google/googletest/archive/release-1.12.0.tar.gz
+tar xvf release-1.12.0.tar.gz
+sudo mv googletest-release-1.12.0 /usr/local/src/
+cd /usr/local/src/googletest-release-1.12.0/
+mkdir build
+cd build/
+cmake ..
+make
+sudo make install
+```
+
 ## 各ソースの説明
 外部から見える(publicな)関数や変数について、ユーザ側でどう扱うかについて説明します。
 

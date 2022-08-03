@@ -1,6 +1,5 @@
-main
 .vscode
-*.o
 *.log
 
+out/
 tndhm_devkit_c-20180826/

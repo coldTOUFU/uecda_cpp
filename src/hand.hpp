@@ -3,9 +3,10 @@
 
 #include <memory>
 #include <vector>
+#include "error/hand_error.hpp"
 #include "cards.hpp"
-#include "hand_summary.cpp"
-#include "table.cpp"
+#include "hand_summary.hpp"
+#include "table.hpp"
 #include "uecda_common.hpp"
 
 class Hand {

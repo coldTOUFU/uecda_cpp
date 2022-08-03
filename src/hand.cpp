@@ -16,12 +16,12 @@ Hand::Hand(uecda_common::CommunicationBody src) {
   Cards::bitcards c = (Cards::bitcards)0;
   Cards::bitcards j = (Cards::bitcards)0;
 
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 15; j++) {
-      if (src[i][j] == 1) {
+  for (int suit = 0; suit < 4; suit++) {
+    for (int order = 0; order < 15; order++) {
+      if (src[suit][order] == 1) {
         c++;
       }
-      else if (src[i][j] == 2) {
+      else if (src[suit][order] == 2) {
         j++;
       }
       c <<= 1;
@@ -48,6 +48,17 @@ bool Hand::isLegal(Table *tbl, Hand *table_hand) {
   if (tbl->getIsStartOfTrick()) { return true; }
 
   HandSummary table_hand_summary = table_hand->getSummary();
+
+  /* ジョーカー1枚出しは最強。 */
+  if (this->summary->quantity == 1 && table_hand_summary.quantity == 1 && this->summary->has_joker) {
+    return true;
+  }
+
+  /* スぺ3返し。 */
+  Cards::bitcards spade3_filter = (0b010000000000000ULL << 45);
+  if (this->summary->quantity == 1  && this->cards->getCard() == spade3_filter && table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
+    return true;
+  }
 
   /* 場と同じ種類の手である必要がある。 */
   if (this->summary->card_type != table_hand_summary.card_type)  { return false; }
@@ -100,7 +111,7 @@ void Hand::putCards(uecda_common::CommunicationBody dst) {
   Cards::bitcards src = this->cards->getCard();
   Cards::bitcards src_joker = this->joker->getCard();
 
-  for (int i = 14; i >= 0; i--) {
+  for (int i = 3; i >= 0; i--) {
     for (int j = 14; j >= 0; j--) {
       dst[i][j] = src % 2;
       /* ジョーカーがある場合 */
@@ -118,17 +129,32 @@ HandSummary *Hand::summarize(Cards::bitcards src, Cards::bitcards joker_src) {
   Cards *src_card = new Cards(src);
   Cards *joker_src_card = new Cards(joker_src);
 
-  Cards::bitcards w_ord = 
-    (src_card->weakestOrder() > joker_src_card->weakestOrder())
-    ? src_card->weakestOrder() : joker_src_card->weakestOrder();
-  Cards::bitcards s_ord = 
-    (src_card->strongestOrder() < joker_src_card->strongestOrder())
-    ? src_card->strongestOrder() : joker_src_card->strongestOrder();
-  
+  Cards::bitcards w_ord = std::max(src_card->weakestOrder(), joker_src_card->weakestOrder());
+  /* s_ordについては、カードが空の場合見かけ上その強さが0(最強よりも強い)になるので、カードが空かどうかで場合分けする。 */
+  Cards::bitcards s_ord;
+  if (src_card->getCard() <= 0) {
+    s_ord = joker_src_card->strongestOrder();
+  } else if (joker_src_card->getCard() <= 0) {
+    s_ord = src_card->strongestOrder();
+  } else {
+    s_ord = std::min(src_card->strongestOrder(), joker_src_card->strongestOrder());
+  }
+
+  int suits = (src_card->getSuits() | joker_src_card->getSuits());
+
+  Cards::CARD_TYPES ctype;
+  if (w_ord == s_ord) {
+    ctype = Cards::CARD_TYPES::kPair;
+  } else if (suits == 0b0001 || suits == 0b0010 || suits == 0b0100 || suits == 0b1000) {
+    ctype = Cards::CARD_TYPES::kSequence;
+  } else {
+    throw CannotConvertToHandException();
+  }
+
   HandSummary *hs = new HandSummary();
   *hs = {
     src_card->quantity() + joker_src_card->quantity(),
-    Cards::CARD_TYPES::kPair,
+    ctype,
     w_ord,
     s_ord,
     joker_src_card->quantity() > 0,

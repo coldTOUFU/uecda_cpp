@@ -1,5 +1,5 @@
-#ifndef TABLE_CPP_
-#define TABLE_CPP_
+#ifndef TABLE_HPP_
+#define TABLE_HPP_
 
 #include "uecda_common.hpp"
 
@@ -28,4 +28,4 @@ class Table {
   bool is_out[4]; // 各プレイヤがあがったか。
 };
 
-#endif // TABLE_CPP_
+#endif // TABLE_HPP_

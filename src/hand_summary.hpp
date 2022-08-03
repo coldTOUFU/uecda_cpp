@@ -1,5 +1,5 @@
-#ifndef HAND_SUMMARY_CPP_
-#define HAND_SUMMARY_CPP_
+#ifndef HAND_SUMMARY_HPP_
+#define HAND_SUMMARY_HPP_
 
 #include "cards.hpp"
 
@@ -12,4 +12,4 @@ struct HandSummary {
   int suits;
 };
 
-#endif  // HAND_SUMMARY_CPP_
+#endif  // HAND_SUMMARY_HPP_

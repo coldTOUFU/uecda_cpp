@@ -6,7 +6,7 @@
 
 #include "../cards.hpp"
 #include "../hand.hpp"
-#include "../table.cpp"
+#include "../table.hpp"
 #include "../uecda_client.hpp"
 #include "../uecda_common.hpp"
 #include "select_hand.hpp"

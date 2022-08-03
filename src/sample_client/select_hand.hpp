@@ -4,8 +4,8 @@
 #include <algorithm>
 
 #include "../hand.hpp"
-#include "../hand_summary.cpp"
-#include "../table.cpp"
+#include "../hand_summary.hpp"
+#include "../table.hpp"
 
 std::vector<Hand*> select_change_hands(std::vector<Hand*>* hands);
 Hand* select_hand(std::vector<Hand*>* hands, Hand* table_hand, Table* table);

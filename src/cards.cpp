@@ -30,9 +30,12 @@ int Cards::getSuits() {
   int s = 0;
 
   for (int i = 0; i < 4; i++) {
-    s += (tmp & (((0xffff >> 1) << 15 * (3 - i)) != 0));
+    bitcards filter = (0xffff >> 1); // 1-15ビット目が1。
+    filter <<= 15 * (3 - i); // 目的のスートのカードのみフィルタリングできるようにシフトする。
+    s += (tmp & filter) != 0;
     s <<= 1;
   }
+  s >>= 1; // 一回余分にシフトした分を戻す。
   return s;
 }
 
@@ -67,17 +70,6 @@ Cards::bitcards Cards::weakestOrder() {
   bitcards tmp = cards;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
-  /* 一番左の1が立っているビットから右をすべて1にする。 */
-  tmp |= (tmp >> 1); // 1が1つ右隣に伝播する(eg. 01000000 -> 01100000)。
-  tmp |= (tmp >> 2); // 1が2つ右隣に伝播する(eg. 01100000 -> 01111000)。
-  tmp |= (tmp >> 4); // 1が4つ右隣に伝播する。
-  tmp |= (tmp >> 8);
-  tmp |= (tmp >> 16);
-  tmp |= (tmp >> 32);
-
-  /* 一番左の1以外を落とす。 */
-  tmp ^= (tmp >> 1);
-
   /*
     一番左(弱い)の1がどのスートの位置にあるかわからないので、
     15ずつずらして論理和をとり、2^0から2^14の範囲内に収める。
@@ -85,32 +77,33 @@ Cards::bitcards Cards::weakestOrder() {
     1が立っているので、これを落とす。
   */
   tmp = (tmp | (tmp >> 15) | (tmp >> 30) | (tmp >> 45)) & (0xffff >> 1);
-  for (int i = 0; i < 15; i++) {
-    if (tmp % 2) { return i; }
 
-    tmp >>= 1;
-  }
+  /* 一番左の1が立っているビットから右をすべて1にする。 */
+  tmp |= (tmp >> 1); // 1が1つ右隣に伝播する(eg. 01000000 -> 01100000)。
+  tmp |= (tmp >> 2); // 1が2つ右隣に伝播する(eg. 01100000 -> 01111000)。
+  tmp |= (tmp >> 4); // 1が4つ右隣に伝播する。
+  tmp |= (tmp >> 8);
+
+  /* 一番左の1以外を落とす。 */
+  tmp ^= (tmp >> 1);
+
   return tmp;
 }
 
 Cards::bitcards Cards::strongestOrder() {
   bitcards tmp = cards;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
-  tmp &= -tmp; // 一番右の(小さい位の)1だけ残す。
 
   /*
     一番右(強い)の1がどのスートの位置にあるかわからないので、
     15ずつずらして論理和をとり、2^0から2^14の範囲内に収める。
-    最後に、一番右の1がクローバー以外のスートにある場合は2^15以降の範囲に
+    一番右の1がクローバー以外のスートにある場合は2^15以降の範囲に
     1が立っているので、これを落とす。
   */
   tmp = (tmp | (tmp >> 15) | (tmp >> 30) | (tmp >> 45)) & (0xffff >> 1);
-  for (int i = 0; i < 15; i++) {
-    if (tmp % 2) { return i; }
 
-    tmp >>= 1;
-  }
-  return tmp;
+  /* 一番右のbitだけ立てて返す。 */
+  return tmp & (-tmp);
 }
 
 void Cards::putCards(uecda_common::CommunicationBody dst) {

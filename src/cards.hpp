@@ -38,7 +38,7 @@ class Cards {
   int quantity();
 
   /* ジョーカーが含まれるか否かを返す。 */
-  int hasJoker() { return (this->cards >> 60) == 1; }
+  bool hasJoker() { return (this->cards >> 60) == 1; }
 
   /* 最弱のカードを15bit形式で返す。 */
   bitcards weakestOrder();

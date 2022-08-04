@@ -700,6 +700,32 @@ TEST(IsLegalTest, LegalSingleJoker) {
   delete table;
 }
 
+TEST(IsLegalTest, IllegalAgainstSingleJoker) {
+  uecda_common::CommunicationBody table_cards = {
+      {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+  Hand* table_hand = new Hand(table_cards);
+  uecda_common::CommunicationBody my_cards = {
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+      {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+  Hand* my_hand = new Hand(my_cards);
+  Table* table = new Table(my_cards);
+
+  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
+  delete table_hand;
+  delete my_hand;
+  delete table;
+}
+
 TEST(IsLegalTest, IllegalSingleJoker) {
   uecda_common::CommunicationBody table_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
@@ -873,9 +899,9 @@ TEST(PushHandsTest, Pair) {
     }
   }
   uecda_common::CommunicationBody result = {{}};
-  src_hand->putCards(result);
 
   EXPECT_NE(nullptr, src_hand);
+  src_hand->putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
@@ -910,9 +936,9 @@ TEST(PushHandsTest, PairWithJoker) {
     }
   }
   uecda_common::CommunicationBody result = {{}};
-  src_hand->putCards(result);
 
   EXPECT_NE(nullptr, src_hand);
+  src_hand->putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
@@ -947,9 +973,9 @@ TEST(PushHandsTest, Sequence) {
     }
   }
   uecda_common::CommunicationBody result = {{}};
-  src_hand->putCards(result);
 
   EXPECT_NE(nullptr, src_hand);
+  src_hand->putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);

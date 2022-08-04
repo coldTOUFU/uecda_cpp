@@ -6,10 +6,8 @@ std::vector<Hand*> select_change_hands(std::vector<Hand*>* hands) {
   /* 交換候補として、ジョーカー以外の1枚出しを取り出す */
   for (const auto& hand : *hands) {
     HandSummary summary = hand->getSummary();
-    if (summary.has_joker) {
-      if (summary.quantity == 1) {
-        single_without_joker.push_back(hand);
-      }
+    if (!summary.has_joker && summary.quantity == 1) {
+      single_without_joker.push_back(hand);
     }
   }
 
@@ -22,7 +20,7 @@ std::vector<Hand*> select_change_hands(std::vector<Hand*>* hands) {
 
 Hand* select_hand(std::vector<Hand*>* hands, Hand* table_hand, Table* table) {
   if (hands->size() <= 0) {
-    return NULL;
+    return nullptr;
   }
 
   std::vector<Hand*> single_without_joker(0);
@@ -39,7 +37,7 @@ Hand* select_hand(std::vector<Hand*>* hands, Hand* table_hand, Table* table) {
     }
 
     HandSummary summary = hand->getSummary();
-    if (summary.has_joker) {
+    if (!summary.has_joker) {
       if (summary.quantity == 1) {
         single_without_joker.push_back(hand);
       } else if (summary.card_type == Cards::CARD_TYPES::kPair) {
@@ -58,78 +56,10 @@ Hand* select_hand(std::vector<Hand*>* hands, Hand* table_hand, Table* table) {
     }
   }
 
-  /* シングル→ペア→階段、ジョーカーなし→ジョーカーありの順で手を探索 */
-  if (single_without_joker.size() > 0) {
-    Hand *best_hand = single_without_joker[0];
-    for (const auto& hand : single_without_joker) {
-      HandSummary best_summary = best_hand->getSummary();
-      HandSummary cur_summary = hand->getSummary();
-      if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
-        best_hand = hand;
-      }
-      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
-        best_hand = hand;
-      }
-    }
-    return best_hand;
-  }
-  if (pair_without_joker.size() > 0) {
-    Hand *best_hand = pair_without_joker[0];
-    for (const auto& hand : pair_without_joker) {
-      HandSummary best_summary = best_hand->getSummary();
-      HandSummary cur_summary = hand->getSummary();
-      if (cur_summary.quantity < best_summary.quantity) {
-        continue;
-      }
-      else if (cur_summary.quantity > best_summary.quantity) {
-        best_hand = hand;
-      }
-      else if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
-        best_hand = hand;
-      }
-      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
-        best_hand = hand;
-      }
-    }
-    return best_hand;
-  }
+  /* 階段→n(>1)枚出し→1枚出し、ジョーカーなし→ジョーカーありの順で手を探索 */
   if (sequence_without_joker.size() > 0) {
     Hand *best_hand = sequence_without_joker[0];
     for (const auto& hand : sequence_without_joker) {
-      HandSummary best_summary = best_hand->getSummary();
-      HandSummary cur_summary = hand->getSummary();
-      if (cur_summary.quantity < best_summary.quantity) {
-        continue;
-      }
-      else if (cur_summary.quantity > best_summary.quantity) {
-        best_hand = hand;
-      }
-      else if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
-        best_hand = hand;
-      }
-      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
-        best_hand = hand;
-      }
-    }
-    return best_hand;
-  }
-  if (single_with_joker.size() > 0) {
-    Hand *best_hand = single_with_joker[0];
-    for (const auto& hand : single_with_joker) {
-      HandSummary best_summary = best_hand->getSummary();
-      HandSummary cur_summary = hand->getSummary();
-      if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
-        best_hand = hand;
-      }
-      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
-        best_hand = hand;
-      }
-    }
-    return best_hand;
-  }
-  if (pair_with_joker.size() > 0) {
-    Hand *best_hand = pair_with_joker[0];
-    for (const auto& hand : pair_with_joker) {
       HandSummary best_summary = best_hand->getSummary();
       HandSummary cur_summary = hand->getSummary();
       if (cur_summary.quantity < best_summary.quantity) {
@@ -168,6 +98,75 @@ Hand* select_hand(std::vector<Hand*>* hands, Hand* table_hand, Table* table) {
     return best_hand;
   }
 
+  if (pair_without_joker.size() > 0) {
+    Hand *best_hand = pair_without_joker[0];
+    for (const auto& hand : pair_without_joker) {
+      HandSummary best_summary = best_hand->getSummary();
+      HandSummary cur_summary = hand->getSummary();
+      if (cur_summary.quantity < best_summary.quantity) {
+        continue;
+      }
+      else if (cur_summary.quantity > best_summary.quantity) {
+        best_hand = hand;
+      }
+      else if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
+        best_hand = hand;
+      }
+      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
+        best_hand = hand;
+      }
+    }
+    return best_hand;
+  }
+  if (pair_with_joker.size() > 0) {
+    Hand *best_hand = pair_with_joker[0];
+    for (const auto& hand : pair_with_joker) {
+      HandSummary best_summary = best_hand->getSummary();
+      HandSummary cur_summary = hand->getSummary();
+      if (cur_summary.quantity < best_summary.quantity) {
+        continue;
+      }
+      else if (cur_summary.quantity > best_summary.quantity) {
+        best_hand = hand;
+      }
+      else if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
+        best_hand = hand;
+      }
+      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
+        best_hand = hand;
+      }
+    }
+    return best_hand;
+  }
+  if (single_without_joker.size() > 0) {
+    Hand *best_hand = single_without_joker[0];
+    for (const auto& hand : single_without_joker) {
+      HandSummary best_summary = best_hand->getSummary();
+      HandSummary cur_summary = hand->getSummary();
+      if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
+        best_hand = hand;
+      }
+      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
+        best_hand = hand;
+      }
+    }
+    return best_hand;
+  }
+  if (single_with_joker.size() > 0) {
+    Hand *best_hand = single_with_joker[0];
+    for (const auto& hand : single_with_joker) {
+      HandSummary best_summary = best_hand->getSummary();
+      HandSummary cur_summary = hand->getSummary();
+      if (!table->getIsRev() && cur_summary.strongest_order > best_summary.strongest_order) {
+        best_hand = hand;
+      }
+      else if (table->getIsRev() && cur_summary.strongest_order < best_summary.strongest_order) {
+        best_hand = hand;
+      }
+    }
+    return best_hand;
+  }
+
   /* 合法手がなかった場合。 */
-  return NULL;
+  return nullptr;
 }

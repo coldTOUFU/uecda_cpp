@@ -122,7 +122,8 @@ void Cards::putCards(uecda_common::CommunicationBody dst) {
 
 
 void Cards::printCards(uecda_common::CommunicationBody src) {
-  std::cout << " |  * |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |  J |  Q |  K |  1 |  2 |  * |\n"
+  std::cout << "-----------------------------------------------------------------------------\n"
+               " |  * |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |  J |  Q |  K |  1 |  2 |  * |\n"
                "-----------------------------------------------------------------------------\n";
   for (int suit = 0; suit < 5; suit++) {
     switch (suit) {

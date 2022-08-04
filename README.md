@@ -1,4 +1,25 @@
+## 概要
+UECda用のカード操作、通信操作をまとめたライブラリの作成を目指して作りました。
+まだ十分な機能がそろっていないので、適宜追加していきたいです。
+
+`sample_client`ディレクトリに、`default`に似た動作をするクライアントがあります。
+ただし、1枚出しを行う際にn枚出しや階段を崩さないよう候補から除く処理が実装できていないので、すこし弱いです。
+
 ## 環境
+
+### 実行確認環境
+```
+$ cat /etc/issue
+Ubuntu 18.04.6 LTS \n \l
+```
+
+```
+$ g++ --version
+g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Copyright (C) 2017 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
 
 ### テスト環境
 GoogleTestを使っています。利用する場合、GoogleTestをインストールしてください。
@@ -167,3 +188,6 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 
 `CommunicationBody`
 サーバが扱う通信用の配列は4バイトなので、32ビット整数型の配列をこの型で定義。
+
+`void printCommunicationBody(CommunicationBody src)`
+使い道(ユーザ): デバッグのために`CommunicationBody`の中身全てを出力する。`Cards`の`printCards`はカードの表示範囲までしか表示しない点が異なる。

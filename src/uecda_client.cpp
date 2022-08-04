@@ -66,12 +66,12 @@ bool UECdaClient::sendSubmissionCards(uecda_common::CommunicationBody src) {
     throw;
   }
 
-  bool is_accepted;
+  int is_accepted;
   if ((read(this->sockfd_, &is_accepted, sizeof(is_accepted))) <= 0) {
     throw ReceiveAcceptedFlagException();
   }
 
-  return is_accepted;
+  return ntohl(is_accepted) == 9;
 }
 
 UECdaClient::GAME_FINISH_STATE UECdaClient::receiveGameFinishState(void) {

@@ -1,11 +1,12 @@
-SRCDIR	= src
-OUTDIR	= out
-OBJDIR	= $(OUTDIR)/obj
-SRCS	= $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp)
-OBJS	= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
-TARGET	= $(OUTDIR)/main
-CC		= g++
-CFLAGS	= -Wall -O0
+SRCDIR			= src
+OUTDIR			= out
+OBJDIR			= $(OUTDIR)/obj
+SRCS			= $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp)
+OBJS			= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
+TARGET			= $(OUTDIR)/main
+CC				= g++
+CFLAGS			= -Wall -O2
+CFLAGS_DEBUG	= -Wall -O0 -g
 
 main: $(TARGET)
 
@@ -14,6 +15,9 @@ $(TARGET): $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CC) $(CFLAGS) -o $@ -c $<
+
+debug: $(OBJS)
+	$(CC) $(CFLAGS_DEBUG) -o $(TARGET) $^
 
 TESTDIR 		= test
 TEST_SRCDIR		= $(TESTDIR)/src
@@ -25,10 +29,10 @@ TEST_CFLAGS		= -Wall -pthread -lgtest_main -lgtest
 
 test: $(TEST_TARGETS)
 
-$(TEST_OUTDIR)/cards_test:	$(TEST_SRCDIR)/cards_test.cpp $(OBJDIR)/cards.o
+$(TEST_OUTDIR)/cards_test:	$(TEST_SRCDIR)/cards_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/cards.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
-$(TEST_OUTDIR)/hand_test:	$(TEST_SRCDIR)/hand_test.cpp $(OBJDIR)/hand.o $(OBJDIR)/cards.o
+$(TEST_OUTDIR)/hand_test:	$(TEST_SRCDIR)/hand_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/hand.o $(OBJDIR)/cards.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
 clean:

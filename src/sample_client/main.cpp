@@ -86,7 +86,12 @@ int main(int argc, char* argv[]) {
       if (table->getIsMyTurn()) {
         /* 手札・場の手を作る */
         Cards* my_cards = new Cards(dealt_body);
-        Hand* table_hand = new Hand(table_body);
+        Hand* table_hand;
+        if (table->getIsStartOfTrick()) {
+          table_hand = nullptr;
+        } else {
+          table_hand = new Hand(table_body);
+        }
 
         /* 手の候補を作る */
         std::vector<Hand*> hands(0);
@@ -97,13 +102,13 @@ int main(int argc, char* argv[]) {
 
         /* 提出用配列に着手を移す */
         uecda_common::CommunicationBody submission_body = {{}};
-        if (submission_hand != NULL) {  // NULLならパス
+        if (submission_hand != nullptr) {  // NULLならパス
           submission_hand->putCards(submission_body);
         }
 
         /* カードを提出 */
         bool is_submit_accepted = client->sendSubmissionCards(submission_body);
-        if (!is_submit_accepted) {
+        if (!is_submit_accepted && submission_hand != nullptr) { // パスの場合も不受理判定になるので弾く。
           std::cerr << "提出カードが受理されませんでした。" << std::endl;
         }
 

@@ -47,6 +47,11 @@ Hand::Hand(Cards::bitcards src, Cards::bitcards joker_src, HandSummary *hs) {
 bool Hand::isLegal(Table *tbl, Hand *table_hand) {
   if (tbl->getIsStartOfTrick()) { return true; }
 
+  /* 場が空でないのにtable_handがNULLになることはあり得ない。 */
+  if (table_hand == nullptr) {
+    throw TableHandIsNullException();
+  }
+
   HandSummary table_hand_summary = table_hand->getSummary();
 
   /* ジョーカー1枚出しは最強。 */
@@ -54,10 +59,14 @@ bool Hand::isLegal(Table *tbl, Hand *table_hand) {
     return true;
   }
 
-  /* スぺ3返し。 */
+  /* 相手がジョーカー1枚出しなら、スぺ3返し以外はできない。 */
   Cards::bitcards spade3_filter = (0b010000000000000ULL << 45);
-  if (this->summary->quantity == 1  && this->cards->getCard() == spade3_filter && table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
-    return true;
+  if (table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
+    if (this->summary->quantity == 1 && this->cards->getCard() == spade3_filter) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /* 場と同じ種類の手である必要がある。 */
@@ -81,6 +90,8 @@ bool Hand::isLegal(Table *tbl, Hand *table_hand) {
 
 void Hand::pushHands(Cards *src, std::vector<Hand*> *hand_vec) {
   Cards::bitcards src_bit = src->getCard();
+  /* 手探索でフィルターにかけるとき邪魔なので、ジョーカーのビットを落とす。  */
+  src_bit &= 0xfffffffffffffff;
 
   for (int pair_qty = 1; pair_qty <= 4; pair_qty++) {
     Hand::pushPair(src_bit, hand_vec, pair_qty);
@@ -99,10 +110,10 @@ void Hand::pushHands(Cards *src, std::vector<Hand*> *hand_vec) {
     delete hs;
 
     for (int pair_qty = 2; pair_qty <= 4; pair_qty++) {
-      Hand::pushPair(src_bit, hand_vec, pair_qty);
+      Hand::pushPairWithJoker(src_bit, hand_vec, pair_qty);
     }
     for (int seq_qty = 3; seq_qty <= 14; seq_qty++) {
-      Hand::pushSequence(src_bit, hand_vec, seq_qty);
+      Hand::pushSequenceWithJoker(src_bit, hand_vec, seq_qty);
     }
   }
 }
@@ -204,7 +215,7 @@ void Hand::pushSequence(Cards::bitcards src, std::vector<Hand*> *hand_vec, int s
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j <= 15 - seq_qty; j++) {
       /* filterを、i番目のスートでj番目から始めるものに適用できるようシフトする。 */
-      Cards::bitcards tmpfilter = (Hand::sequenceFilters[seq_qty] << (15 * i + j));
+      Cards::bitcards tmpfilter = (Hand::sequenceFilters[seq_qty - 1] << (15 * i + j));
       if((src & tmpfilter) == tmpfilter) { 
         Cards::bitcards j = (Cards::bitcards)0;
         HandSummary *hs = Hand::summarize(tmpfilter, j);
@@ -222,7 +233,7 @@ void Hand::pushSequenceWithJoker(Cards::bitcards src, std::vector<Hand*> *hand_v
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j <= 15 - seq_qty; j++) {
       /* filterを、i番目のスートでj番目から始めるものに適用できるようシフトする。 */
-      Cards::bitcards tmpfilter = (Hand::sequenceFilters[seq_qty] << (15 * i + j));
+      Cards::bitcards tmpfilter = (Hand::sequenceFilters[seq_qty - 1] << (15 * i + j));
       if (Cards::count(src & tmpfilter) == seq_qty - 1) {
         Cards::bitcards c = (src & tmpfilter);
         Cards::bitcards j = (~src & tmpfilter);

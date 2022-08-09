@@ -62,7 +62,7 @@ bool Hand::isLegal(Table *tbl, Hand *table_hand) {
   /* 相手がジョーカー1枚出しなら、スぺ3返し以外はできない。 */
   Cards::bitcards spade3_filter = (0b010000000000000ULL << 45);
   if (table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
-    if (this->summary->quantity == 1 && this->cards->getCard() == spade3_filter) {
+    if (this->summary->quantity == 1 && this->cards->filterCards(spade3_filter) != 0) {
       return true;
     } else {
       return false;

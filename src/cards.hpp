@@ -52,6 +52,17 @@ class Cards {
   /* デバッグ用に与えられたカードを出力。 */
   static void printCards(uecda_common::CommunicationBody src);
 
+  /* 与えられたカードを追加する。 */
+  void addCards(Cards *src) { this->cards_ |= src->cards_; }
+
+  /* 与えられたカードを引く。 */
+  void subCards(Cards *src) { this->cards_ ^= (this->cards_ & src->cards_); }
+
+  /* カードに与えられたフィルターをかけた結果を返す。 */
+  bitcards filterCards(bitcards filter) {
+    return (this->cards_ & filter);
+  }
+
  private:
   bitcards cards_;
 };

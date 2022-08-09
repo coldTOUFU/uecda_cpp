@@ -23,13 +23,13 @@ class Cards {
   Cards(uecda_common::CommunicationBody src);
 
   /* ビットカードから生成。 */
-  Cards(bitcards src) { this->cards = src; }
+  Cards(bitcards src) { this->cards_ = src; }
 
   /* 与えられたビットカードの枚数を返す。 */
   static int count(bitcards src);
 
   /* カードを返す。 */
-  bitcards getCard() { return this->cards; }
+  bitcards getCard() { return this->cards_; }
 
   /* カードに含まれるスートを4bit形式で返す。 */
   int getSuits();
@@ -38,7 +38,7 @@ class Cards {
   int quantity();
 
   /* ジョーカーが含まれるか否かを返す。 */
-  bool hasJoker() { return (this->cards >> 60) == 1; }
+  bool hasJoker() { return (this->cards_ >> 60) == 1; }
 
   /* 最弱のカードを15bit形式で返す。 */
   bitcards weakestOrder();
@@ -53,7 +53,7 @@ class Cards {
   static void printCards(uecda_common::CommunicationBody src);
 
  private:
-  bitcards cards;
+  bitcards cards_;
 };
 
 #endif  // CARDS_HPP_

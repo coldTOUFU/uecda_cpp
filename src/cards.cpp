@@ -1,30 +1,30 @@
 #include "cards.hpp"
 
 Cards::Cards(uecda_common::CommunicationBody src) {
-  cards = 0;
+  this->cards_ = 0;
 
   /* Joker。 */
   if (src[4][1] == 2) {
-    cards++;
+    this->cards_++;
   }
-  cards <<= 1;
+  this->cards_ <<= 1;
 
   /* Joker以外の各札。 */
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 15; j++) {
       if (src[i][j] == 1) {
-        cards++;
+        this->cards_++;
       }
-      cards <<= 1;
+      this->cards_ <<= 1;
     }
   }
 
   /* 上で余計に1回左シフトした分を戻す。 */
-  cards >>= 1;
+  this->cards_ >>= 1;
 }
 
 int Cards::getSuits() {
-  bitcards tmp = cards;
+  bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
   int s = 0;
@@ -40,7 +40,7 @@ int Cards::getSuits() {
 }
 
 int Cards::quantity() {
-  return this->count(this->cards);
+  return this->count(this->cards_);
 }
 
 int Cards::count(bitcards src) {
@@ -67,7 +67,7 @@ int Cards::count(bitcards src) {
 }
 
 Cards::bitcards Cards::weakestOrder() {
-  bitcards tmp = cards;
+  bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
   /*
@@ -91,7 +91,7 @@ Cards::bitcards Cards::weakestOrder() {
 }
 
 Cards::bitcards Cards::strongestOrder() {
-  bitcards tmp = cards;
+  bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
   /*
@@ -107,7 +107,7 @@ Cards::bitcards Cards::strongestOrder() {
 }
 
 void Cards::putCards(uecda_common::CommunicationBody dst) {
-  bitcards src = this->cards;
+  bitcards src = this->cards_;
 
   /* Joker以外の各札。 */
   for (int i = 3; i >= 0; i--) {

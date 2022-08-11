@@ -21,12 +21,15 @@ class UECdaClient {
 
   UECdaClient(std::string pname = kDefaultPlayerName,
               int port = kDefaultPort,
-              std::string sname = kDefaultServerHostname);
+              std::string sname = kDefaultServerHostname):
+              server_hostname_(sname),
+              port_(port),
+              player_name_(pname) {};
 
   /* サーバに接続してゲームに参加する。自分のプレーヤ番号を返す。 */
   int enterGame();
 
-  void exitGame() {
+  void exitGame() const {
     /* サーバとの接続を切る。 */
     try {
       closeSocket();
@@ -36,22 +39,22 @@ class UECdaClient {
   }
 
   /* サーバからラウンド開始時の手札を受け取る。 */
-  void receiveMyInitialCards(uecda_common::CommunicationBody dst);
+  void receiveMyInitialCards(uecda_common::CommunicationBody dst) const;
 
   /* カード交換時のカードの提出 */
-  void sendExchangeCards(uecda_common::CommunicationBody cards);
+  void sendExchangeCards(uecda_common::CommunicationBody cards) const;
 
   /* カードを受け取る。 */
-  void receiveMyCards(uecda_common::CommunicationBody dst);
+  void receiveMyCards(uecda_common::CommunicationBody dst) const;
 
   /* カードを提出し受理されたか否かを返す */
-  bool sendSubmissionCards(uecda_common::CommunicationBody src);
+  bool sendSubmissionCards(uecda_common::CommunicationBody src) const;
 
   //ラウンドの最後にゲームか終ったかを、サーバから受けとりその値を返す。
-  GAME_FINISH_STATE receiveGameFinishState(void);
+  GAME_FINISH_STATE receiveGameFinishState(void) const;
 
   /* 場札を受け取る */
-  void receiveTableCards(uecda_common::CommunicationBody dst);
+  void receiveTableCards(uecda_common::CommunicationBody dst) const;
 
  private:
   static constexpr int kProtocolVersion = 20070;
@@ -68,15 +71,15 @@ class UECdaClient {
 
   int sockfd_;
   struct sockaddr_in client_addr_;
-  std::string server_hostname_;
-  int port_;
-  std::string player_name_;
+  const std::string server_hostname_;
+  const int port_;
+  const std::string player_name_;
 
   /* ソケットの初期化を行う。 */
   void openSocket();
 
   /* 通信を切断する。 */
-  void closeSocket() {
+  void closeSocket() const {
     if (close(this->sockfd_) != 0) {
       std::cerr << "サーバ切断に失敗しました: " << std::endl;
       throw CloseSocketException();
@@ -84,13 +87,13 @@ class UECdaClient {
   }
 
   /* クライアントの情報を送信。 */
-  void sendClientProfile();
+  void sendClientProfile() const;
 
   /* サーバからカードを受け取ってdst_tableに埋め込む。 */
-  void receiveCommunicationBody(uecda_common::CommunicationBody dst);
+  void receiveCommunicationBody(uecda_common::CommunicationBody dst) const;
 
   /* サーバからカードを受け取ってdst_tableに埋め込む。 */
-  void sendCommunicationBody(uecda_common::CommunicationBody src);
+  void sendCommunicationBody(uecda_common::CommunicationBody src) const;
 };
 
 #endif  // UECDA_CLIENT_HPP_

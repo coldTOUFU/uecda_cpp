@@ -10,7 +10,7 @@ TEST(IsLegalTest, LegalSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -20,13 +20,10 @@ TEST(IsLegalTest, LegalSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSingleRev) {
@@ -36,7 +33,7 @@ TEST(IsLegalTest, LegalSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -46,13 +43,10 @@ TEST(IsLegalTest, LegalSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualSingle) {
@@ -62,7 +56,7 @@ TEST(IsLegalTest, IllegalEqualSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -72,13 +66,10 @@ TEST(IsLegalTest, IllegalEqualSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualSingleRev) {
@@ -88,7 +79,7 @@ TEST(IsLegalTest, IllegalEqualSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -98,13 +89,10 @@ TEST(IsLegalTest, IllegalEqualSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakSingle) {
@@ -114,7 +102,7 @@ TEST(IsLegalTest, IllegalWeakSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -124,13 +112,10 @@ TEST(IsLegalTest, IllegalWeakSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakSingleRev) {
@@ -140,7 +125,7 @@ TEST(IsLegalTest, IllegalWeakSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -150,13 +135,10 @@ TEST(IsLegalTest, IllegalWeakSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalPair) {
@@ -166,7 +148,7 @@ TEST(IsLegalTest, LegalPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -176,13 +158,10 @@ TEST(IsLegalTest, LegalPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalPairRev) {
@@ -192,7 +171,7 @@ TEST(IsLegalTest, LegalPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -202,13 +181,10 @@ TEST(IsLegalTest, LegalPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalDifferentQuantityPair) {
@@ -218,7 +194,7 @@ TEST(IsLegalTest, IllegalDifferentQuantityPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -228,13 +204,10 @@ TEST(IsLegalTest, IllegalDifferentQuantityPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalPairLocked) {
@@ -244,7 +217,7 @@ TEST(IsLegalTest, LegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -254,13 +227,10 @@ TEST(IsLegalTest, LegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalPairLocked) {
@@ -270,7 +240,7 @@ TEST(IsLegalTest, IllegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -280,13 +250,10 @@ TEST(IsLegalTest, IllegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualPair) {
@@ -296,7 +263,7 @@ TEST(IsLegalTest, IllegalEqualPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -306,13 +273,10 @@ TEST(IsLegalTest, IllegalEqualPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualPairRev) {
@@ -322,7 +286,7 @@ TEST(IsLegalTest, IllegalEqualPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -332,13 +296,10 @@ TEST(IsLegalTest, IllegalEqualPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakPair) {
@@ -348,7 +309,7 @@ TEST(IsLegalTest, IllegalWeakPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -358,13 +319,10 @@ TEST(IsLegalTest, IllegalWeakPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakPairRev) {
@@ -374,7 +332,7 @@ TEST(IsLegalTest, IllegalWeakPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -384,13 +342,10 @@ TEST(IsLegalTest, IllegalWeakPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSequence) {
@@ -400,7 +355,7 @@ TEST(IsLegalTest, LegalSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
@@ -410,13 +365,10 @@ TEST(IsLegalTest, LegalSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSequenceRev) {
@@ -426,7 +378,7 @@ TEST(IsLegalTest, LegalSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -436,13 +388,10 @@ TEST(IsLegalTest, LegalSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSequenceLocked) {
@@ -452,7 +401,7 @@ TEST(IsLegalTest, LegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -462,13 +411,10 @@ TEST(IsLegalTest, LegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalSequenceLocked) {
@@ -478,7 +424,7 @@ TEST(IsLegalTest, IllegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
@@ -488,13 +434,10 @@ TEST(IsLegalTest, IllegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalDifferentQuantitySequence) {
@@ -504,7 +447,7 @@ TEST(IsLegalTest, IllegalDifferentQuantitySequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
@@ -514,13 +457,10 @@ TEST(IsLegalTest, IllegalDifferentQuantitySequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualSequence) {
@@ -530,7 +470,7 @@ TEST(IsLegalTest, IllegalEqualSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -540,13 +480,10 @@ TEST(IsLegalTest, IllegalEqualSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalEqualSequenceRev) {
@@ -556,7 +493,7 @@ TEST(IsLegalTest, IllegalEqualSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -566,13 +503,10 @@ TEST(IsLegalTest, IllegalEqualSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakSequence) {
@@ -582,7 +516,7 @@ TEST(IsLegalTest, IllegalWeakSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -592,13 +526,10 @@ TEST(IsLegalTest, IllegalWeakSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalWeakSequenceRev) {
@@ -608,7 +539,7 @@ TEST(IsLegalTest, IllegalWeakSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
@@ -618,18 +549,15 @@ TEST(IsLegalTest, IllegalWeakSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, EmptyTable) {
   uecda_common::CommunicationBody table_cards = {{}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -639,13 +567,10 @@ TEST(IsLegalTest, EmptyTable) {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalDifferentCardType) {
@@ -655,7 +580,7 @@ TEST(IsLegalTest, IllegalDifferentCardType) {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -665,13 +590,10 @@ TEST(IsLegalTest, IllegalDifferentCardType) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSingleJoker) {
@@ -681,7 +603,7 @@ TEST(IsLegalTest, LegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -691,13 +613,10 @@ TEST(IsLegalTest, LegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalAgainstSingleJoker) {
@@ -707,7 +626,7 @@ TEST(IsLegalTest, IllegalAgainstSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -717,13 +636,10 @@ TEST(IsLegalTest, IllegalAgainstSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalSingleJoker) {
@@ -733,7 +649,7 @@ TEST(IsLegalTest, IllegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -743,13 +659,10 @@ TEST(IsLegalTest, IllegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, LegalSpade3) {
@@ -759,7 +672,7 @@ TEST(IsLegalTest, LegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -769,13 +682,10 @@ TEST(IsLegalTest, LegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_TRUE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_TRUE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(IsLegalTest, IllegalSpade3) {
@@ -785,7 +695,7 @@ TEST(IsLegalTest, IllegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* table_hand = new Hand(table_cards);
+  Hand table_hand = Hand(table_cards);
   uecda_common::CommunicationBody my_cards = {
       {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -795,13 +705,10 @@ TEST(IsLegalTest, IllegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* my_hand = new Hand(my_cards);
-  Table* table = new Table(my_cards);
+  Hand my_hand = Hand(my_cards);
+  Table table = Table(my_cards);
 
-  EXPECT_FALSE(my_hand->isLegal(table, table_hand));
-  delete table_hand;
-  delete my_hand;
-  delete table;
+  EXPECT_FALSE(my_hand.isLegal(table, table_hand));
 }
 
 TEST(GetSummaryTest, Pair) {
@@ -811,15 +718,14 @@ TEST(GetSummaryTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* hand = new Hand(src);
-  HandSummary summary = hand->getSummary();
+  Hand hand = Hand(src);
+  HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(2, summary.quantity);
   EXPECT_EQ(0b000010000000000, summary.weakest_order);
   EXPECT_EQ(0b000010000000000, summary.strongest_order);
   EXPECT_FALSE(summary.has_joker);
   EXPECT_EQ(0b1100, summary.suits);
-  delete hand;
 }
 
 TEST(GetSummaryTest, PairWithJoker) {
@@ -829,15 +735,14 @@ TEST(GetSummaryTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* hand = new Hand(src);
-  HandSummary summary = hand->getSummary();
+  Hand hand = Hand(src);
+  HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(2, summary.quantity);
   EXPECT_EQ(0b000010000000000, summary.weakest_order);
   EXPECT_EQ(0b000010000000000, summary.strongest_order);
   EXPECT_TRUE(summary.has_joker);
   EXPECT_EQ(0b1100, summary.suits);
-  delete hand;
 }
 
 TEST(GetSummaryTest, Sequence) {
@@ -847,15 +752,14 @@ TEST(GetSummaryTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* hand = new Hand(src);
-  HandSummary summary = hand->getSummary();
+  Hand hand = Hand(src);
+  HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(4, summary.quantity);
   EXPECT_EQ(0b000010000000000, summary.weakest_order);
   EXPECT_EQ(0b000000010000000, summary.strongest_order);
   EXPECT_FALSE(summary.has_joker);
   EXPECT_EQ(0b1000, summary.suits);
-  delete hand;
 }
 
 TEST(GetSummaryTest, SequenceWithJoker) {
@@ -865,15 +769,14 @@ TEST(GetSummaryTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand* hand = new Hand(src);
-  HandSummary summary = hand->getSummary();
+  Hand hand = Hand(src);
+  HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(4, summary.quantity);
   EXPECT_EQ(0b000010000000000, summary.weakest_order);
   EXPECT_EQ(0b000000010000000, summary.strongest_order);
   EXPECT_TRUE(summary.has_joker);
   EXPECT_EQ(0b1000, summary.suits);
-  delete hand;
 }
 
 TEST(PushHandsTest, Pair) {
@@ -889,27 +792,22 @@ TEST(PushHandsTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Cards* my_cards = new Cards(src);
-  std::vector<Hand*> hands(0);
-  Hand::pushHands(my_cards, &hands);
-  Hand *src_hand = nullptr;
-  for (const auto& hand: hands) {
-    if (hand->getSummary().quantity == 2) {
+  Cards my_cards = Cards(src);
+  std::vector<Hand> hands;
+  Hand::pushHands(my_cards, hands);
+  Hand src_hand = Hand();
+  for (Hand& hand: hands) {
+    if (hand.getSummary().quantity == 2) {
       src_hand = hand;
     }
   }
   uecda_common::CommunicationBody result = {{}};
 
-  EXPECT_NE(nullptr, src_hand);
-  src_hand->putCards(result);
+  src_hand.putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
-  }
-  delete my_cards;
-  for (auto& hand : hands) {
-    delete hand;
   }
 }
 
@@ -926,27 +824,22 @@ TEST(PushHandsTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Cards* my_cards = new Cards(src);
-  std::vector<Hand*> hands(0);
-  Hand::pushHands(my_cards, &hands);
-  Hand *src_hand = nullptr;
-  for (const auto& hand: hands) {
-    if (hand->getSummary().quantity == 2) {
+  Cards my_cards = Cards(src);
+  std::vector<Hand> hands;
+  Hand::pushHands(my_cards, hands);
+  Hand src_hand = Hand();
+  for (Hand& hand: hands) {
+    if (hand.getSummary().quantity == 2) {
       src_hand = hand;
     }
   }
   uecda_common::CommunicationBody result = {{}};
 
-  EXPECT_NE(nullptr, src_hand);
-  src_hand->putCards(result);
+  src_hand.putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
-  }
-  delete my_cards;
-  for (auto& hand : hands) {
-    delete hand;
   }
 }
 
@@ -963,27 +856,22 @@ TEST(PushHandsTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Cards* my_cards = new Cards(src);
-  std::vector<Hand*> hands(0);
-  Hand::pushHands(my_cards, &hands);
-  Hand *src_hand = nullptr;
+  Cards my_cards = Cards(src);
+  std::vector<Hand> hands;
+  Hand::pushHands(my_cards, hands);
+  Hand src_hand = Hand();
   for (const auto& hand: hands) {
-    if (hand->getSummary().quantity == 4) {
+    if (hand.getSummary().quantity == 4) {
       src_hand = hand;
     }
   }
   uecda_common::CommunicationBody result = {{}};
 
-  EXPECT_NE(nullptr, src_hand);
-  src_hand->putCards(result);
+  src_hand.putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
-  }
-  delete my_cards;
-  for (auto& hand : hands) {
-    delete hand;
   }
 }
 
@@ -1000,27 +888,22 @@ TEST(PushHandsTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Cards* my_cards = new Cards(src);
-  std::vector<Hand*> hands(0);
-  Hand::pushHands(my_cards, &hands);
-  Hand *src_hand = nullptr;
+  Cards my_cards = Cards(src);
+  std::vector<Hand> hands;
+  Hand::pushHands(my_cards, hands);
+  Hand src_hand = Hand();
   for (const auto& hand: hands) {
-    if (hand->getSummary().quantity == 4) {
+    if (hand.getSummary().quantity == 4) {
       src_hand = hand;
     }
   }
   uecda_common::CommunicationBody result = {{}};
-  src_hand->putCards(result);
 
-  EXPECT_NE(nullptr, src_hand);
+  src_hand.putCards(result);
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
-  }
-  delete my_cards;
-  for (auto& hand : hands) {
-    delete hand;
   }
 }
 
@@ -1031,16 +914,15 @@ TEST(PutCardsTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand *hand = new Hand(dst);
+  Hand hand = Hand(dst);
   uecda_common::CommunicationBody result = {{}};
-  hand->putCards(result);
+  hand.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete hand;
 }
 
 TEST(PutCardsTest, PairWithJoker) {
@@ -1050,16 +932,15 @@ TEST(PutCardsTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand *hand = new Hand(dst);
+  Hand hand = Hand(dst);
   uecda_common::CommunicationBody result = {{}};
-  hand->putCards(result);
+  hand.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete hand;
 }
 
 TEST(PutCardsTest, Sequence) {
@@ -1069,16 +950,15 @@ TEST(PutCardsTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand *hand = new Hand(dst);
+  Hand hand = Hand(dst);
   uecda_common::CommunicationBody result = {{}};
-  hand->putCards(result);
+  hand.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete hand;
 }
 
 TEST(PutCardsTest, SequenceWithJoker) {
@@ -1088,14 +968,13 @@ TEST(PutCardsTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-  Hand *hand = new Hand(dst);
+  Hand hand = Hand(dst);
   uecda_common::CommunicationBody result = {{}};
-  hand->putCards(result);
+  hand.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete hand;
 }

@@ -3,12 +3,6 @@
 const std::string UECdaClient::kDefaultServerHostname = "127.0.0.1";
 const std::string UECdaClient::kDefaultPlayerName = "sample";
 
-UECdaClient::UECdaClient(std::string pname, int port, std::string sname) {
-  this->server_hostname_ = sname;
-  this->port_ = port;
-  this->player_name_ = pname;
-}
-
 int UECdaClient::enterGame(void) {
   /* サーバと接続する。 */
   try {
@@ -31,7 +25,7 @@ int UECdaClient::enterGame(void) {
   return my_playernum;
 }
 
-void UECdaClient::receiveMyInitialCards(uecda_common::CommunicationBody dst) {
+void UECdaClient::receiveMyInitialCards(uecda_common::CommunicationBody dst) const {
   try {
     receiveCommunicationBody(dst);
   } catch (const ReceiveCommunicationBodyException& e) {
@@ -40,7 +34,7 @@ void UECdaClient::receiveMyInitialCards(uecda_common::CommunicationBody dst) {
   }
 }
 
-void UECdaClient::receiveMyCards(uecda_common::CommunicationBody dst) {
+void UECdaClient::receiveMyCards(uecda_common::CommunicationBody dst) const {
   try {
     receiveCommunicationBody(dst);
   } catch (const ReceiveCommunicationBodyException& e) {
@@ -49,7 +43,7 @@ void UECdaClient::receiveMyCards(uecda_common::CommunicationBody dst) {
   }
 }
 
-void UECdaClient::sendExchangeCards(uecda_common::CommunicationBody src) {
+void UECdaClient::sendExchangeCards(uecda_common::CommunicationBody src) const {
   try {
     sendCommunicationBody(src);
   } catch (const SendCommunicationBodyException& e) {
@@ -58,7 +52,7 @@ void UECdaClient::sendExchangeCards(uecda_common::CommunicationBody src) {
   }
 }
 
-bool UECdaClient::sendSubmissionCards(uecda_common::CommunicationBody src) {
+bool UECdaClient::sendSubmissionCards(uecda_common::CommunicationBody src) const {
   try {
     sendCommunicationBody(src);
   } catch (const SendCommunicationBodyException& e) {
@@ -74,7 +68,7 @@ bool UECdaClient::sendSubmissionCards(uecda_common::CommunicationBody src) {
   return ntohl(is_accepted) == 9;
 }
 
-UECdaClient::GAME_FINISH_STATE UECdaClient::receiveGameFinishState(void) {
+UECdaClient::GAME_FINISH_STATE UECdaClient::receiveGameFinishState(void) const {
   int flag;
   /* ゲーム終了に関する情報を受け取る。 */
   if ((read(this->sockfd_, &flag, sizeof(flag))) <= 0) {
@@ -96,7 +90,7 @@ UECdaClient::GAME_FINISH_STATE UECdaClient::receiveGameFinishState(void) {
 }
 
 /* 場札を受け取る */
-void UECdaClient::receiveTableCards(uecda_common::CommunicationBody dst) {
+void UECdaClient::receiveTableCards(uecda_common::CommunicationBody dst) const {
   try {
     receiveCommunicationBody(dst);
   } catch (const SendCommunicationBodyException& e) {
@@ -105,7 +99,7 @@ void UECdaClient::receiveTableCards(uecda_common::CommunicationBody dst) {
   }
 }
 
-void UECdaClient::receiveCommunicationBody(uecda_common::CommunicationBody dst_table) {
+void UECdaClient::receiveCommunicationBody(uecda_common::CommunicationBody dst_table) const {
   uecda_common::CommunicationBody src_table = {{}};
   if (read(this->sockfd_, src_table, 4 * 8 * 15) <= 0) {
     throw ReceiveCommunicationBodyException();
@@ -120,7 +114,7 @@ void UECdaClient::receiveCommunicationBody(uecda_common::CommunicationBody dst_t
   }
 }
 
-void UECdaClient::sendCommunicationBody(uecda_common::CommunicationBody src_table) {
+void UECdaClient::sendCommunicationBody(uecda_common::CommunicationBody src_table) const {
   uecda_common::CommunicationBody dst_table = {{}};
   /* テーブルの要素をホストオーダーから
      ネットワークオーダーに変換した上でコピー。 */
@@ -169,7 +163,7 @@ void UECdaClient::openSocket() {
 }
 
 /* クライアントの情報を送信 */
-void UECdaClient::sendClientProfile() {
+void UECdaClient::sendClientProfile() const {
   uecda_common::CommunicationBody profile = {{}};
   profile[0][0] = UECdaClient::kProtocolVersion;
   for (int i = 0; i < 15; i++) {

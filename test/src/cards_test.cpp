@@ -19,10 +19,9 @@ TEST(CountTest, Full) {
 
 TEST(GetCardTest, Empty) {
   uecda_common::CommunicationBody src = {{}};
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0, cards->getCard());
-  delete cards;
+  EXPECT_EQ(0, cards.getCard());
 }
 
 TEST(GetCardTest, Normal) {
@@ -33,12 +32,11 @@ TEST(GetCardTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   Cards::bitcards dst = 0b0000010000000000000001000000000000000100000000000000010000000;
 
-  EXPECT_EQ(dst, cards->getCard());
-  delete cards;
-}
+  EXPECT_EQ(dst, cards.getCard());
+  }
 
 TEST(GetCardTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
@@ -49,20 +47,18 @@ TEST(GetCardTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   Cards::bitcards dst = 0b1111111111111111111111111111111111111111111111111111111111111;
 
-  EXPECT_EQ(dst, cards->getCard());
-  delete cards;
-}
+  EXPECT_EQ(dst, cards.getCard());
+  }
 
 TEST(GetSuits, Empty) {
   uecda_common::CommunicationBody src = {{}};
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0, cards.getSuits());
+  }
 
 TEST(GetSuits, OneSpade) {
   uecda_common::CommunicationBody src = {
@@ -72,11 +68,10 @@ TEST(GetSuits, OneSpade) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b1000, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b1000, cards.getSuits());
+  }
 
 TEST(GetSuits, OneHeart) {
   uecda_common::CommunicationBody src = {
@@ -86,11 +81,10 @@ TEST(GetSuits, OneHeart) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b0100, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b0100, cards.getSuits());
+  }
 
 TEST(GetSuits, OneDiamond) {
   uecda_common::CommunicationBody src = {
@@ -100,11 +94,10 @@ TEST(GetSuits, OneDiamond) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b0010, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b0010, cards.getSuits());
+  }
 
 TEST(GetSuits, OneClover) {
   uecda_common::CommunicationBody src = {
@@ -114,11 +107,10 @@ TEST(GetSuits, OneClover) {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b0001, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b0001, cards.getSuits());
+  }
 
 TEST(GetSuits, Two) {
   uecda_common::CommunicationBody src = {
@@ -128,11 +120,10 @@ TEST(GetSuits, Two) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b1010, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b1010, cards.getSuits());
+  }
 
 TEST(GetSuits, Three) {
   uecda_common::CommunicationBody src = {
@@ -142,11 +133,10 @@ TEST(GetSuits, Three) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b1110, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b1110, cards.getSuits());
+  }
 
 TEST(GetSuits, All) {
   uecda_common::CommunicationBody src = {
@@ -156,11 +146,10 @@ TEST(GetSuits, All) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b1111, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b1111, cards.getSuits());
+  }
 
 TEST(GetSuits, Full) {
   /* 使う場所をすべて埋めた状態。 */
@@ -171,19 +160,17 @@ TEST(GetSuits, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b1111, cards->getSuits());
-  delete cards;
-}
+  EXPECT_EQ(0b1111, cards.getSuits());
+  }
 
 TEST(QuantityTest, Empty) {
   uecda_common::CommunicationBody src = {{}};
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0, cards->quantity());
-  delete cards;
-}
+  EXPECT_EQ(0, cards.quantity());
+  }
 
 TEST(QuantityTest, Normal) {
   uecda_common::CommunicationBody src = {
@@ -193,11 +180,10 @@ TEST(QuantityTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(4, cards->quantity());  
-  delete cards;
-}
+  EXPECT_EQ(4, cards.quantity());  
+  }
 
 TEST(QuantityTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
@@ -208,11 +194,10 @@ TEST(QuantityTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(61, cards->quantity());
-  delete cards;
-}
+  EXPECT_EQ(61, cards.quantity());
+  }
 
 TEST(HasJokerTest, False) {
   uecda_common::CommunicationBody src = {
@@ -222,11 +207,10 @@ TEST(HasJokerTest, False) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_FALSE(cards->hasJoker());
-  delete cards;
-}
+  EXPECT_FALSE(cards.hasJoker());
+  }
 
 TEST(HasJokerTest, True) {
   uecda_common::CommunicationBody src = {
@@ -236,11 +220,10 @@ TEST(HasJokerTest, True) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_TRUE(cards->hasJoker());
-  delete cards;
-}
+  EXPECT_TRUE(cards.hasJoker());
+  }
 
 TEST(WeakestOrderTest, Empty) {
   uecda_common::CommunicationBody src = {
@@ -250,11 +233,10 @@ TEST(WeakestOrderTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0, cards->weakestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0, cards.weakestOrder());
+  }
 
 TEST(WeakestOrderTest, Weakest) {
   uecda_common::CommunicationBody src = {
@@ -264,11 +246,10 @@ TEST(WeakestOrderTest, Weakest) {
     {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   
-  EXPECT_EQ(0b100000000000000, cards->weakestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b100000000000000, cards.weakestOrder());
+  }
 
 TEST(WeakestOrderTest, Normal) {
   uecda_common::CommunicationBody src = {
@@ -278,11 +259,10 @@ TEST(WeakestOrderTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   
-  EXPECT_EQ(0b000010000000000, cards->weakestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b000010000000000, cards.weakestOrder());
+  }
 
 TEST(WeakestOrderTest, Strongest) {
   uecda_common::CommunicationBody src = {
@@ -292,11 +272,10 @@ TEST(WeakestOrderTest, Strongest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   
-  EXPECT_EQ(0b000000000000001, cards->weakestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b000000000000001, cards.weakestOrder());
+  }
 
 TEST(StrongestOrderTest, Empty) {
   uecda_common::CommunicationBody src = {
@@ -306,11 +285,10 @@ TEST(StrongestOrderTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0, cards->strongestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0, cards.strongestOrder());
+  }
 
 TEST(StrongestOrderTest, Weakest) {
   uecda_common::CommunicationBody src = {
@@ -320,11 +298,10 @@ TEST(StrongestOrderTest, Weakest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b100000000000000, cards->strongestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b100000000000000, cards.strongestOrder());
+  }
 
 TEST(StrongestOrderTest, Normal) {
   uecda_common::CommunicationBody src = {
@@ -334,11 +311,10 @@ TEST(StrongestOrderTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   
-  EXPECT_EQ(0b000000010000000, cards->strongestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b000000010000000, cards.strongestOrder());
+  }
 
 TEST(StrongestOrderTest, Strongest) {
   uecda_common::CommunicationBody src = {
@@ -348,25 +324,23 @@ TEST(StrongestOrderTest, Strongest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
 
-  EXPECT_EQ(0b000000000000001, cards->strongestOrder());
-  delete cards;
-}
+  EXPECT_EQ(0b000000000000001, cards.strongestOrder());
+  }
 
 TEST(PutCardsTest, Empty) {
   uecda_common::CommunicationBody src = {{}};
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(src[i][j], result[i][j]);
     }
   }
-  delete cards;
-}
+  }
 
 TEST(PutCardsTest, Normal) {
   uecda_common::CommunicationBody src = {
@@ -376,17 +350,16 @@ TEST(PutCardsTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(src[i][j], result[i][j]);
     }
   }
-  delete cards;
-}
+  }
 
 TEST(PutCardsTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
@@ -397,17 +370,16 @@ TEST(PutCardsTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
+  Cards cards = Cards(src);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(src[i][j], result[i][j]);
     }
   }
-  delete cards;
-}
+  }
 
 TEST(addCardsTest, Empty) {
   uecda_common::CommunicationBody src = {
@@ -431,20 +403,18 @@ TEST(addCardsTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *plus_cards = new Cards(plus_body);
-  cards->addCards(plus_cards);
+  Cards cards = Cards(src);
+  Cards plus_cards = Cards(plus_body);
+  cards.addCards(plus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete plus_cards;
-}
+    }
 
 TEST(addCardsTest, Overlapping) {
   uecda_common::CommunicationBody src = {
@@ -468,20 +438,18 @@ TEST(addCardsTest, Overlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *plus_cards = new Cards(plus_body);
-  cards->addCards(plus_cards);
+  Cards cards = Cards(src);
+  Cards plus_cards = Cards(plus_body);
+  cards.addCards(plus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete plus_cards;
-}
+    }
 
 TEST(addCardsTest, NoOverlapping) {
   uecda_common::CommunicationBody src = {
@@ -505,20 +473,18 @@ TEST(addCardsTest, NoOverlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *plus_cards = new Cards(plus_body);
-  cards->addCards(plus_cards);
+  Cards cards = Cards(src);
+  Cards plus_cards = Cards(plus_body);
+  cards.addCards(plus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete plus_cards;
-}
+    }
 
 TEST(addCardsTest, Joker) {
   uecda_common::CommunicationBody src = {
@@ -542,20 +508,18 @@ TEST(addCardsTest, Joker) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *plus_cards = new Cards(plus_body);
-  cards->addCards(plus_cards);
+  Cards cards = Cards(src);
+  Cards plus_cards = Cards(plus_body);
+  cards.addCards(plus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete plus_cards;
-}
+    }
 
 TEST(addCardsTest, Full) {
   uecda_common::CommunicationBody src = {
@@ -579,20 +543,18 @@ TEST(addCardsTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *plus_cards = new Cards(plus_body);
-  cards->addCards(plus_cards);
+  Cards cards = Cards(src);
+  Cards plus_cards = Cards(plus_body);
+  cards.addCards(plus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete plus_cards;
-}
+    }
 
 TEST(subCardsTest, Empty) {
   uecda_common::CommunicationBody src = {
@@ -616,20 +578,18 @@ TEST(subCardsTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *minus_cards = new Cards(minus_body);
-  cards->subCards(minus_cards);
+  Cards cards = Cards(src);
+  Cards minus_cards = Cards(minus_body);
+  cards.subCards(minus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete minus_cards;
-}
+    }
 
 TEST(subCardsTest, Overlapping) {
   uecda_common::CommunicationBody src = {
@@ -653,20 +613,18 @@ TEST(subCardsTest, Overlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *minus_cards = new Cards(minus_body);
-  cards->subCards(minus_cards);
+  Cards cards = Cards(src);
+  Cards minus_cards = Cards(minus_body);
+  cards.subCards(minus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete minus_cards;
-}
+    }
 
 
 TEST(subCardsTest, NoOverlapping) {
@@ -691,20 +649,18 @@ TEST(subCardsTest, NoOverlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *minus_cards = new Cards(minus_body);
-  cards->subCards(minus_cards);
+  Cards cards = Cards(src);
+  Cards minus_cards = Cards(minus_body);
+  cards.subCards(minus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete minus_cards;
-}
+    }
 
 TEST(subCardsTest, Joker) {
   uecda_common::CommunicationBody src = {
@@ -728,20 +684,18 @@ TEST(subCardsTest, Joker) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *minus_cards = new Cards(minus_body);
-  cards->subCards(minus_cards);
+  Cards cards = Cards(src);
+  Cards minus_cards = Cards(minus_body);
+  cards.subCards(minus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete minus_cards;
-}
+    }
 
 TEST(subCardsTest, Full) {
   uecda_common::CommunicationBody src = {
@@ -765,20 +719,18 @@ TEST(subCardsTest, Full) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  Cards *cards = new Cards(src);
-  Cards *minus_cards = new Cards(minus_body);
-  cards->subCards(minus_cards);
+  Cards cards = Cards(src);
+  Cards minus_cards = Cards(minus_body);
+  cards.subCards(minus_cards);
   uecda_common::CommunicationBody result = {{}};
-  cards->putCards(result);
+  cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
     for (int j = 0; j < 15; j++) {
       EXPECT_EQ(dst[i][j], result[i][j]);
     }
   }
-  delete cards;
-  delete minus_cards;
-}
+    }
 
 TEST(filterCardsTest, Empty) {
   uecda_common::CommunicationBody src = {
@@ -798,12 +750,11 @@ TEST(filterCardsTest, Empty) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards *cards = new Cards(src);
-  Cards::bitcards result = cards->filterCards(filter);
+  Cards cards = Cards(src);
+  Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
-  delete cards;
-}
+  }
 
 TEST(filterCardsTest, Overlapping) {
   uecda_common::CommunicationBody src = {
@@ -823,12 +774,11 @@ TEST(filterCardsTest, Overlapping) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards *cards = new Cards(src);
-  Cards::bitcards result = cards->filterCards(filter);
+  Cards cards = Cards(src);
+  Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
-  delete cards;
-}
+  }
 
 TEST(filterCardsTest, NoOverlapping) {
   uecda_common::CommunicationBody src = {
@@ -848,12 +798,11 @@ TEST(filterCardsTest, NoOverlapping) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards *cards = new Cards(src);
-  Cards::bitcards result = cards->filterCards(filter);
+  Cards cards = Cards(src);
+  Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
-  delete cards;
-}
+  }
 
 TEST(filterCardsTest, Joker) {
   uecda_common::CommunicationBody src = {
@@ -873,12 +822,11 @@ TEST(filterCardsTest, Joker) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards *cards = new Cards(src);
-  Cards::bitcards result = cards->filterCards(filter);
+  Cards cards = Cards(src);
+  Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
-  delete cards;
-}
+  }
 
 TEST(filterCardsTest, Full) {
   uecda_common::CommunicationBody src = {
@@ -898,9 +846,8 @@ TEST(filterCardsTest, Full) {
 000001000000000\
 000000100000000\
 000000010000000;
-  Cards *cards = new Cards(src);
-  Cards::bitcards result = cards->filterCards(filter);
+  Cards cards = Cards(src);
+  Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
-  delete cards;
-}
+  }

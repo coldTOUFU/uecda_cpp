@@ -19,7 +19,7 @@ std::vector<Hand> select_change_hands(std::vector<Hand> &hands) {
 }
 
 /* 手の枚数と強さの観点のみから最善の手を選ぶ。 */
-Hand &select_best_hand_in_same_card_type(std::vector<Hand> &hands, bool is_rev) {
+Hand &select_best_hand_in_same_hand_type(std::vector<Hand> &hands, bool is_rev) {
   Hand &best_hand = hands[0];
   for (Hand &hand : hands) {
     const HandSummary &best_summary = best_hand.getSummary();
@@ -63,7 +63,7 @@ Hand select_hand(std::vector<Hand> &hands, const Hand &table_hand, const Table &
     if (!summary.has_joker) {
       if (summary.quantity == 1) {
         single_without_joker.push_back(hand);
-      } else if (summary.card_type == Cards::CARD_TYPES::kPair) {
+      } else if (!summary.is_sequence) {
         pair_without_joker.push_back(hand);
       } else {
         sequence_without_joker.push_back(hand);
@@ -71,7 +71,7 @@ Hand select_hand(std::vector<Hand> &hands, const Hand &table_hand, const Table &
     } else {
       if (summary.quantity == 1) {
         single_with_joker.push_back(hand);
-      } else if (summary.card_type == Cards::CARD_TYPES::kPair) {
+      } else if (!summary.is_sequence) {
         pair_with_joker.push_back(hand);
       } else {
         sequence_with_joker.push_back(hand);
@@ -81,27 +81,27 @@ Hand select_hand(std::vector<Hand> &hands, const Hand &table_hand, const Table &
 
   /* 階段→n(>1)枚出し→1枚出し、ジョーカーなし→ジョーカーありの順で手を探索 */
   if (sequence_without_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(sequence_without_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(sequence_without_joker, table.is_rev);
   }
 
   if (sequence_with_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(sequence_with_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(sequence_with_joker, table.is_rev);
   }
 
   if (pair_without_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(pair_without_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(pair_without_joker, table.is_rev);
   }
 
   if (pair_with_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(pair_with_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(pair_with_joker, table.is_rev);
   }
 
   if (single_without_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(single_without_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(single_without_joker, table.is_rev);
   }
 
   if (single_with_joker.size() > 0) {
-    return select_best_hand_in_same_card_type(single_with_joker, table.is_rev);
+    return select_best_hand_in_same_hand_type(single_with_joker, table.is_rev);
   }
 
   /* 合法手がなかった場合はパスを返す。 */

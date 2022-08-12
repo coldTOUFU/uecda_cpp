@@ -121,7 +121,7 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 `int quantity`
 - カードの枚数。
 
-`CARD_TYPES card_type`
+`HAND_TYPE hand_type`
 - カードのタイプ。`kPair`は枚数組、`kSequence`は階段組を意味する。
 
 `Cards::bitcards weakest_order`

@@ -11,8 +11,6 @@ class Cards {
  public:
   using bitcards = uint_fast64_t;
 
-  enum class CARD_TYPES { kPair, kSequence };
-
   /* 整数は、UECda-2007における標準ルール下でのカード表現と対応している。 */
   static constexpr int kSpade = 0;
   static constexpr int kHeart = 1;

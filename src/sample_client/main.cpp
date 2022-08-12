@@ -77,7 +77,6 @@ int main(int argc, char* argv[]) {
 
       /* 着手 */
       if (table.is_my_turn) {
-printf("1\n");
         /* 手札・場の手を作る */
         Cards my_cards = Cards(dealt_body);
         Hand table_hand;
@@ -87,7 +86,6 @@ printf("1\n");
           table_hand = Hand(table_body);
         }
 
-printf("2\n");
         /* 手の候補を作る */
         std::vector<Hand> hands;
         Hand::pushHands(my_cards, hands);
@@ -95,18 +93,15 @@ printf("2\n");
         /* 着手を決める */
         const Hand submission_hand = select_hand(hands, table_hand, table);
 
-printf("3\n");
         /* 提出用配列に着手を移す */
         uecda_common::CommunicationBody submission_body = {{}};
         submission_hand.putCards(submission_body);
 
-printf("4\n");
         /* カードを提出 */
         const bool is_submit_accepted = client.sendSubmissionCards(submission_body);
-        if (!is_submit_accepted /* TODO: パス判定の実装&& submission_hand != nullptr */) { // パスの場合も不受理判定になるので弾く。
+        if (!submission_hand.getSummary().is_pass && !is_submit_accepted) { // パスの場合も不受理判定になるので弾く。
           std::cerr << "提出カードが受理されませんでした。" << std::endl;
         }
-printf("5\n");
       } else {
         /* 他プレイヤのターン時の行動を記述 */
       }

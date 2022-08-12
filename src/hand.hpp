@@ -12,7 +12,7 @@
 class Hand {
  public:
   /* 空の手 = パス */
-  Hand(): cards_(), joker_(), summary_() {};
+  Hand(): cards_(), joker_(), summary_(Hand::summarize({}, {})) {};
 
   /* 配列形式のカードから手を生成。 */
   Hand(const uecda_common::CommunicationBody src): cards_(Hand::createCards(src)), joker_(Hand::createJoker(src)), summary_(Hand::summarize(cards_.getCard(), joker_.getCard())) {};
@@ -37,7 +37,10 @@ class Hand {
     uecda_common::CommunicationBody src = {{}};
     this->putCards(src);
     std::cout << std::endl;
-    std::cout << "カードの種類: " << ((this->summary_.card_type == Cards::CARD_TYPES::kPair) ? "枚数型" : "階段") << std::endl;
+    std::cout << "カードの種類: ";
+    std::cout << (this->summary_.is_pass ? "パス" : "");
+    std::cout << (this->summary_.is_sequence ? "階段" : "n枚組");
+    std::cout << std::endl;
     std::cout << "カードの枚数: " << this->summary_.quantity << std::endl;
     Cards::printCards(src);
   }

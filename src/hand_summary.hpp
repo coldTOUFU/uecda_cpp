@@ -5,7 +5,8 @@
 
 struct HandSummary {
   int quantity;
-  Cards::CARD_TYPES card_type;
+  bool is_pass;
+  bool is_sequence;
   Cards::bitcards weakest_order;
   Cards::bitcards strongest_order;
   bool has_joker;

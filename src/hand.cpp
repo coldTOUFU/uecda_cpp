@@ -14,6 +14,7 @@ const Cards::bitcards Hand::sequenceFilters[14] = {
 
 bool Hand::isLegal(const Table &tbl, const Hand &table_hand) const {
   if (tbl.is_start_of_trick) { return true; }
+  if (this->summary_.is_pass) { return true; }
 
   HandSummary table_hand_summary = table_hand.getSummary();
 
@@ -33,7 +34,7 @@ bool Hand::isLegal(const Table &tbl, const Hand &table_hand) const {
   }
 
   /* 場と同じ種類の手である必要がある。 */
-  if (this->summary_.card_type != table_hand_summary.card_type)  { return false; }
+  if (this->summary_.is_sequence != table_hand_summary.is_sequence)  { return false; }
 
   /* 場のカードと同枚数である必要がある。 */
   if (this->summary_.quantity != table_hand_summary.quantity) { return false; }
@@ -136,6 +137,10 @@ HandSummary Hand::summarize(Cards::bitcards src, Cards::bitcards joker_src) {
   Cards src_card = Cards(src);
   Cards joker_src_card = Cards(joker_src);
 
+  if (src_card.quantity() == 0 && joker_src_card.quantity() == 0) {
+    return {0, true, 0, 0, 0, 0, 0};
+  }
+
   Cards::bitcards w_ord = std::max(src_card.weakestOrder(), joker_src_card.weakestOrder());
   /* s_ordについては、カードが空の場合見かけ上その強さが0(最強よりも強い)になるので、カードが空かどうかで場合分けする。 */
   Cards::bitcards s_ord;
@@ -149,24 +154,24 @@ HandSummary Hand::summarize(Cards::bitcards src, Cards::bitcards joker_src) {
 
   int suits = (src_card.getSuits() | joker_src_card.getSuits());
 
-  Cards::CARD_TYPES ctype;
+  bool is_sequence;
   if (w_ord == s_ord) {
-    ctype = Cards::CARD_TYPES::kPair;
+    is_sequence = false;
   } else if (suits == 0b0001 || suits == 0b0010 || suits == 0b0100 || suits == 0b1000) {
-    ctype = Cards::CARD_TYPES::kSequence;
+    is_sequence = true;
   } else {
     throw CannotConvertToHandException();
   }
 
-  HandSummary hs = {
+  return {
     src_card.quantity() + joker_src_card.quantity(),
-    ctype,
+    false,
+    is_sequence,
     w_ord,
     s_ord,
     joker_src_card.quantity() > 0,
     src_card.getSuits() | joker_src_card.getSuits()
   };
-  return hs;
 }
 
 void Hand::pushPair(Cards::bitcards src, std::vector<Hand> &hand_vec, int pair_qty) {

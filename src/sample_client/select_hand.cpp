@@ -40,6 +40,52 @@ Hand &select_best_hand_in_same_hand_type(std::vector<Hand> &hands, bool is_rev) 
   return best_hand;
 }
 
+/* 1枚組を出す場合、複数枚役を崩さないモノを優先する。 */
+Hand select_isolated_hand(Cards my_cards, std::vector<Hand>& hands, const Hand& table_hand, const Table& table) {
+  /* 手の候補がないかカードが空なら(あり得ないが)、パスの手を返す。 */
+  if (my_cards.quantity() <= 0 || hands.size() <= 0) {
+    return Hand();
+  }
+
+  /* ジョーカーなしで複数枚組を構成するカードを候補から除外。 */
+  for (const Hand &hand : hands) {
+    const HandSummary summary = hand.getSummary();
+     if(!summary.has_joker) {
+      if (summary.quantity > 1) {
+        my_cards -= hand.getCards();
+      }
+    }
+  }
+
+  /* 候補のカードが0になったらパスを返す。 */
+  if (my_cards.quantity() <= 0) {
+    return Hand();
+  }
+
+  /* 候補の役を生成。 */
+  std::vector<Hand> isolated_hands;  
+  Hand::pushHands(my_cards, isolated_hands);
+
+  /* 候補からジョーカー以外の合法な1枚出しを取り出す。 */
+  std::vector<Hand> single_without_joker;
+  for (const Hand &hand : hands) {
+    if (!hand.isLegal(table, table_hand)) {
+      continue;
+    }
+    const HandSummary summary = hand.getSummary();
+    if (!summary.has_joker && summary.quantity == 1) {
+      single_without_joker.push_back(hand);
+    }
+  }
+
+  /* 最良の手を返す。 */
+  if (single_without_joker.size() > 0) {
+    return select_best_hand_in_same_hand_type(single_without_joker, table.is_rev);
+  } else {
+    return Hand();
+  }
+}
+
 Hand select_hand(std::vector<Hand> &hands, const Hand &table_hand, const Table &table) {
   /* 手の候補がなければ(あり得ないが)、パスの手を返す。 */
   if (hands.size() <= 0) {

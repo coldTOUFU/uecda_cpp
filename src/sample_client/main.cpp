@@ -90,8 +90,14 @@ int main(int argc, char* argv[]) {
         std::vector<Hand> hands;
         Hand::pushHands(my_cards, hands);
 
-        /* 着手を決める */
-        const Hand submission_hand = select_hand(hands, table_hand, table);
+        /* 着手を決める。場が1枚組の場合、まず複数枚役を崩さない手が出せるか検討し、なければ普通の選択関数を使う。 */
+        Hand submission_hand = Hand();
+        if (table_hand.getSummary().quantity == 1) {
+          select_isolated_hand(my_cards, hands, table_hand, table);
+        }
+        if (submission_hand.getSummary().is_pass) {
+          submission_hand = select_hand(hands, table_hand, table);
+        }
 
         /* 提出用配列に着手を移す */
         uecda_common::CommunicationBody submission_body = {{}};

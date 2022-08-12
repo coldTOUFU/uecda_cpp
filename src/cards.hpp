@@ -54,10 +54,30 @@ class Cards {
   static void printCards(uecda_common::CommunicationBody src);
 
   /* 与えられたカードを追加する。 */
-  void addCards(Cards src) { this->cards_ |= src.cards_; }
+  Cards& operator +=(const Cards &src) {
+    this->cards_ |= src.cards_;
+    return *this;
+  }
+
+  /* 与えられたカードとの和からなるオブジェクトを返す。 */
+  Cards operator +(const Cards &src) const {
+    Cards dst = *this;
+    dst.cards_ |= src.cards_;
+    return dst;
+  }
 
   /* 与えられたカードを引く。 */
-  void subCards(Cards src) { this->cards_ ^= (this->cards_ & src.cards_); }
+  Cards& operator -=(const Cards &src) {
+    this->cards_ ^= (this->cards_ & src.cards_); 
+    return *this;
+  }
+
+  /* 与えられたカードとの差からなるオブジェクトを返す。 */
+  Cards operator -(const Cards &src) const {
+    Cards dst = *this;
+    dst.cards_ ^= (dst.cards_ & src.cards_); 
+    return dst;
+  }
 
   /* カードに与えられたフィルターをかけた結果を返す。 */
   bitcards filterCards(bitcards filter) const {

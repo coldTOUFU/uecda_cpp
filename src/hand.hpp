@@ -29,6 +29,21 @@ class Hand {
   /* 与えられたベクターに、与えられたカードから生成できる手をすべて追加する。 */
   static void pushHands(const Cards& src, std::vector<Hand>& hand_vec);
 
+  /* ジョーカー以外のカードを返す。 */
+  Cards getCards() const {
+    return this->cards_;
+  }
+
+  /* ジョーカーを返す。 */
+  Cards getJoker() const {
+    return this->joker_;
+  }
+
+  /* ジョーカーを含むカードを返す。ジョーカーの位置は特定できない。 */
+  Cards getWholeBitcards() const {
+    return this->cards_ + this->joker_;
+  }
+
   /* 与えられた配列に手の構成カードを置く。 */
   void putCards(uecda_common::CommunicationBody dst) const;
 

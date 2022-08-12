@@ -3,14 +3,16 @@
 
 #include "cards.hpp"
 
-struct HandSummary {
-  int quantity;
-  bool is_pass;
-  bool is_sequence;
-  Cards::bitcards weakest_order;
-  Cards::bitcards strongest_order;
-  bool has_joker;
-  int suits;
-};
+namespace uecda {
+  struct HandSummary {
+    int quantity;
+    bool is_pass;
+    bool is_sequence;
+    Cards::bitcards weakest_order;
+    Cards::bitcards strongest_order;
+    bool has_joker;
+    int suits;
+  };
+}
 
 #endif  // HAND_SUMMARY_HPP_

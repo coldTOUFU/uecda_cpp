@@ -4,9 +4,11 @@
 #include <cstdint>
 #include <iostream>
 
-namespace uecda_common {
-using CommunicationBody = uint32_t[8][15];
-void printCommunicationBody(CommunicationBody src);
-}  // namespace uecda_common
+namespace uecda {
+  namespace common {
+    using CommunicationBody = uint32_t[8][15];
+    void printCommunicationBody(CommunicationBody src);
+  }  // namespace
+}
 
 #endif  // UECDA_COMMON_HPP_

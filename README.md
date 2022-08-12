@@ -50,7 +50,7 @@ sudo make install
 ユーザは、自分の手札をこのインスタンスで保持できます。
 ユーザに想定されるのは、手札配列を渡してインスタンスを作成し、必要に応じてHandクラスに渡すことのみです。
 
-`Cards(uecda_common::CommunicationBody src)`
+`Cards(uecda::common::CommunicationBody src)`
 - 使い道(ユーザ): 自分の手札からCardsインスタンスを作成。
 
 `Cards(bitcards src)`
@@ -77,10 +77,10 @@ sudo make install
 `bitcards strongestOrder()`
 - 使い道(内部): Handで最強のカードの位置を得る。
 
-`void Cards::putCards(uecda_common::CommunicationBody dst)`
+`void Cards::putCards(uecda::common::CommunicationBody dst)`
 - 使い道(ユーザ): デバッグ用に、カード表現をよりユーザが扱いやすい配列表現にする。
 
-`static void Cards::printCards(uecda_common::CommunicationBody src)`
+`static void Cards::printCards(uecda::common::CommunicationBody src)`
 - 使い道(ユーザ): デバッグ用に、与えられたカード表現を出力する。
 
 `void addCards(Cards *src)`
@@ -97,7 +97,7 @@ sudo make install
 Cardsクラスとの違いは、Cardsが配列表現のみから得られる情報しか扱わないのに対し、
 Handクラスでは大貧民のルールに基づく情報を扱える点にあります。
 
-`Hand(uecda_common::CommunicationBody src)`
+`Hand(uecda::common::CommunicationBody src)`
 - 使い道(ユーザ): 合法手であることの判定などに用いるため、場の手からHandインスタンスを作成。
 
 `Hand(Cards::bitcards src, Cards::bitcards joker_src, HandSummary *hs)`
@@ -112,7 +112,7 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 `static void pushHands(Cards *src, std::vector<Hand*> *hand_vec)`
 - 使い道(ユーザ): 手札から生成したCardsインスタンスをもとに、手の集合を配列に書き込む。このとき合法かは問わない。
 
-`void putCards(uecda_common::CommunicationBody dst)`
+`void putCards(uecda::common::CommunicationBody dst)`
 - 使い道(ユーザ): この手を通信に用いられるカード表現として配列に書き込む。
 
 ### hand_summary
@@ -139,7 +139,7 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 ### table
 場の情報を配列から読み込み、保持するクラス。
 
-`Table(uecda_common::CommunicationBody src)`
+`Table(uecda::common::CommunicationBody src)`
 - 使い道(ユーザ): サーバから送られた場の情報を含む配列から、必要な情報を読み取る。
 
 `bool getIsMyTurn()`
@@ -173,22 +173,22 @@ Handクラスでは大貧民のルールに基づく情報を扱える点にあ�
 `void exitGame()`
 - 使い道(ユーザ): サーバとの接続を終える。
 
-`void receiveMyInitialCards(uecda_common::CommunicationBody dst)`
+`void receiveMyInitialCards(uecda::common::CommunicationBody dst)`
 - 使い道(ユーザ): サーバからラウンド開始時の手札を受け取る。内容は交換実行前のものになっている。
 
-`void sendExchangeCards(uecda_common::CommunicationBody cards)`
+`void sendExchangeCards(uecda::common::CommunicationBody cards)`
 - 使い道(ユーザ): 交換するカードを提出する。富豪以上の場合のみ実行する。
 
-`void receiveMyCards(uecda_common::CommunicationBody dst)`
+`void receiveMyCards(uecda::common::CommunicationBody dst)`
 - 使い道（ユーザ): サーバから自分の手札を受け取る。
 
-`bool sendSubmissionCards(uecda_common::CommunicationBody src)`
+`bool sendSubmissionCards(uecda::common::CommunicationBody src)`
 - 使い道（ユーザ): カードを提出し受理されたか否かを受け取る。
 
 `GAME_FINISH_STATE receiveGameFinishState(void)`
 - 使い道(ユーザ): ラウンドの最後にゲームか終ったかをサーバから受けとりその値を返す。
 
-`void receiveTable(uecda_common::CommunicationBody dst)`
+`void receiveTable(uecda::common::CommunicationBody dst)`
 - 使い道(ユーザ): 場札を受け取る。
 
 ### uecda_common

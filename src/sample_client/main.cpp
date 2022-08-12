@@ -11,6 +11,8 @@
 #include "../uecda_common.hpp"
 #include "select_hand.hpp"
 
+using namespace uecda;
+
 int main(int argc, char* argv[]) {
   bool is_round_end = false;
   bool is_game_end = false;
@@ -22,8 +24,8 @@ int main(int argc, char* argv[]) {
   /* ラウンドの繰り返し */
   while (!is_game_end) {
     is_round_end = false;
-    uecda_common::CommunicationBody dealt_body = {{}};
-    uecda_common::CommunicationBody table_body = {{}};
+    uecda::common::CommunicationBody dealt_body = {{}};
+    uecda::common::CommunicationBody table_body = {{}};
 
     /* 交換前の手札を受け取る */
     client.receiveMyInitialCards(dealt_body);
@@ -46,8 +48,8 @@ int main(int argc, char* argv[]) {
       std::vector<Hand> submission_hands = select_change_hands(hands);
 
       /* 提出用配列に着手を移す */
-      uecda_common::CommunicationBody submission_body1 = {{}};
-      uecda_common::CommunicationBody submission_body2 = {{}};
+      uecda::common::CommunicationBody submission_body1 = {{}};
+      uecda::common::CommunicationBody submission_body2 = {{}};
       submission_hands[0].putCards(submission_body1);
       if (qty_to_change >= 2) {
         submission_hands[1].putCards(submission_body2);
@@ -100,7 +102,7 @@ int main(int argc, char* argv[]) {
         }
 
         /* 提出用配列に着手を移す */
-        uecda_common::CommunicationBody submission_body = {{}};
+        uecda::common::CommunicationBody submission_body = {{}};
         submission_hand.putCards(submission_body);
 
         /* カードを提出 */

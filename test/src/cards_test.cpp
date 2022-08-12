@@ -2,6 +2,8 @@
 
 #include "../../src/cards.hpp"
 
+using namespace uecda;
+
 TEST(CountTest, Empty) {
   EXPECT_EQ(0, Cards::count(0));
 }
@@ -18,14 +20,14 @@ TEST(CountTest, Full) {
 }
 
 TEST(GetCardTest, Empty) {
-  uecda_common::CommunicationBody src = {{}};
+  uecda::common::CommunicationBody src = {{}};
   Cards cards = Cards(src);
 
   EXPECT_EQ(0, cards.getCard());
 }
 
 TEST(GetCardTest, Normal) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -40,7 +42,7 @@ TEST(GetCardTest, Normal) {
 
 TEST(GetCardTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -54,14 +56,14 @@ TEST(GetCardTest, Full) {
   }
 
 TEST(GetSuits, Empty) {
-  uecda_common::CommunicationBody src = {{}};
+  uecda::common::CommunicationBody src = {{}};
   Cards cards = Cards(src);
 
   EXPECT_EQ(0, cards.getSuits());
   }
 
 TEST(GetSuits, OneSpade) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -74,7 +76,7 @@ TEST(GetSuits, OneSpade) {
   }
 
 TEST(GetSuits, OneHeart) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -87,7 +89,7 @@ TEST(GetSuits, OneHeart) {
   }
 
 TEST(GetSuits, OneDiamond) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -100,7 +102,7 @@ TEST(GetSuits, OneDiamond) {
   }
 
 TEST(GetSuits, OneClover) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -113,7 +115,7 @@ TEST(GetSuits, OneClover) {
   }
 
 TEST(GetSuits, Two) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -126,7 +128,7 @@ TEST(GetSuits, Two) {
   }
 
 TEST(GetSuits, Three) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -139,7 +141,7 @@ TEST(GetSuits, Three) {
   }
 
 TEST(GetSuits, All) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -153,7 +155,7 @@ TEST(GetSuits, All) {
 
 TEST(GetSuits, Full) {
   /* 使う場所をすべて埋めた状態。 */
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -166,14 +168,14 @@ TEST(GetSuits, Full) {
   }
 
 TEST(QuantityTest, Empty) {
-  uecda_common::CommunicationBody src = {{}};
+  uecda::common::CommunicationBody src = {{}};
   Cards cards = Cards(src);
 
   EXPECT_EQ(0, cards.quantity());
   }
 
 TEST(QuantityTest, Normal) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -187,7 +189,7 @@ TEST(QuantityTest, Normal) {
 
 TEST(QuantityTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -200,7 +202,7 @@ TEST(QuantityTest, Full) {
   }
 
 TEST(HasJokerTest, False) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -213,7 +215,7 @@ TEST(HasJokerTest, False) {
   }
 
 TEST(HasJokerTest, True) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -226,7 +228,7 @@ TEST(HasJokerTest, True) {
   }
 
 TEST(WeakestOrderTest, Empty) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -239,7 +241,7 @@ TEST(WeakestOrderTest, Empty) {
   }
 
 TEST(WeakestOrderTest, Weakest) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -252,7 +254,7 @@ TEST(WeakestOrderTest, Weakest) {
   }
 
 TEST(WeakestOrderTest, Normal) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -265,7 +267,7 @@ TEST(WeakestOrderTest, Normal) {
   }
 
 TEST(WeakestOrderTest, Strongest) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -278,7 +280,7 @@ TEST(WeakestOrderTest, Strongest) {
   }
 
 TEST(StrongestOrderTest, Empty) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -291,7 +293,7 @@ TEST(StrongestOrderTest, Empty) {
   }
 
 TEST(StrongestOrderTest, Weakest) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -304,7 +306,7 @@ TEST(StrongestOrderTest, Weakest) {
   }
 
 TEST(StrongestOrderTest, Normal) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -317,7 +319,7 @@ TEST(StrongestOrderTest, Normal) {
   }
 
 TEST(StrongestOrderTest, Strongest) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
@@ -330,9 +332,9 @@ TEST(StrongestOrderTest, Strongest) {
   }
 
 TEST(PutCardsTest, Empty) {
-  uecda_common::CommunicationBody src = {{}};
+  uecda::common::CommunicationBody src = {{}};
   Cards cards = Cards(src);
-  uecda_common::CommunicationBody result = {{}};
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -343,7 +345,7 @@ TEST(PutCardsTest, Empty) {
   }
 
 TEST(PutCardsTest, Normal) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -351,7 +353,7 @@ TEST(PutCardsTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
 };
   Cards cards = Cards(src);
-  uecda_common::CommunicationBody result = {{}};
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -363,7 +365,7 @@ TEST(PutCardsTest, Normal) {
 
 TEST(PutCardsTest, Full) {
   /* 使う場所をすべて埋めた状態。 */
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -371,7 +373,7 @@ TEST(PutCardsTest, Full) {
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
   Cards cards = Cards(src);
-  uecda_common::CommunicationBody result = {{}};
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -382,21 +384,21 @@ TEST(PutCardsTest, Full) {
   }
 
 TEST(addCardsTest, Empty) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody plus_body = {
+  uecda::common::CommunicationBody plus_body = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -405,8 +407,8 @@ TEST(addCardsTest, Empty) {
   };
   Cards cards = Cards(src);
   Cards plus_cards = Cards(plus_body);
-  cards.addCards(plus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards += plus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -417,21 +419,21 @@ TEST(addCardsTest, Empty) {
     }
 
 TEST(addCardsTest, Overlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody plus_body = {
+  uecda::common::CommunicationBody plus_body = {
     {0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -440,8 +442,8 @@ TEST(addCardsTest, Overlapping) {
   };
   Cards cards = Cards(src);
   Cards plus_cards = Cards(plus_body);
-  cards.addCards(plus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards += plus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -452,21 +454,21 @@ TEST(addCardsTest, Overlapping) {
     }
 
 TEST(addCardsTest, NoOverlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody plus_body = {
+  uecda::common::CommunicationBody plus_body = {
     {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -475,8 +477,8 @@ TEST(addCardsTest, NoOverlapping) {
   };
   Cards cards = Cards(src);
   Cards plus_cards = Cards(plus_body);
-  cards.addCards(plus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards += plus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -487,21 +489,21 @@ TEST(addCardsTest, NoOverlapping) {
     }
 
 TEST(addCardsTest, Joker) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody plus_body = {
+  uecda::common::CommunicationBody plus_body = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -510,8 +512,8 @@ TEST(addCardsTest, Joker) {
   };
   Cards cards = Cards(src);
   Cards plus_cards = Cards(plus_body);
-  cards.addCards(plus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards += plus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -522,21 +524,21 @@ TEST(addCardsTest, Joker) {
     }
 
 TEST(addCardsTest, Full) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody plus_body = {
+  uecda::common::CommunicationBody plus_body = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -545,8 +547,8 @@ TEST(addCardsTest, Full) {
   };
   Cards cards = Cards(src);
   Cards plus_cards = Cards(plus_body);
-  cards.addCards(plus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards += plus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -557,21 +559,21 @@ TEST(addCardsTest, Full) {
     }
 
 TEST(subCardsTest, Empty) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody minus_body = {
+  uecda::common::CommunicationBody minus_body = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -580,8 +582,8 @@ TEST(subCardsTest, Empty) {
   };
   Cards cards = Cards(src);
   Cards minus_cards = Cards(minus_body);
-  cards.subCards(minus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards -= minus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -592,21 +594,21 @@ TEST(subCardsTest, Empty) {
     }
 
 TEST(subCardsTest, Overlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody minus_body = {
+  uecda::common::CommunicationBody minus_body = {
     {0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -615,8 +617,8 @@ TEST(subCardsTest, Overlapping) {
   };
   Cards cards = Cards(src);
   Cards minus_cards = Cards(minus_body);
-  cards.subCards(minus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards -= minus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -628,21 +630,21 @@ TEST(subCardsTest, Overlapping) {
 
 
 TEST(subCardsTest, NoOverlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody minus_body = {
+  uecda::common::CommunicationBody minus_body = {
     {0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -651,8 +653,8 @@ TEST(subCardsTest, NoOverlapping) {
   };
   Cards cards = Cards(src);
   Cards minus_cards = Cards(minus_body);
-  cards.subCards(minus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards -= minus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -663,21 +665,21 @@ TEST(subCardsTest, NoOverlapping) {
     }
 
 TEST(subCardsTest, Joker) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody minus_body = {
+  uecda::common::CommunicationBody minus_body = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -686,8 +688,8 @@ TEST(subCardsTest, Joker) {
   };
   Cards cards = Cards(src);
   Cards minus_cards = Cards(minus_body);
-  cards.subCards(minus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards -= minus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -698,21 +700,21 @@ TEST(subCardsTest, Joker) {
     }
 
 TEST(subCardsTest, Full) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody minus_body = {
+  uecda::common::CommunicationBody minus_body = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   };
-  uecda_common::CommunicationBody dst = {
+  uecda::common::CommunicationBody dst = {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -721,8 +723,8 @@ TEST(subCardsTest, Full) {
   };
   Cards cards = Cards(src);
   Cards minus_cards = Cards(minus_body);
-  cards.subCards(minus_cards);
-  uecda_common::CommunicationBody result = {{}};
+  cards -= minus_cards;
+  uecda::common::CommunicationBody result = {{}};
   cards.putCards(result);
 
   for (int i = 0; i < 5; i++) {
@@ -733,7 +735,7 @@ TEST(subCardsTest, Full) {
     }
 
 TEST(filterCardsTest, Empty) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -757,7 +759,7 @@ TEST(filterCardsTest, Empty) {
   }
 
 TEST(filterCardsTest, Overlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -781,7 +783,7 @@ TEST(filterCardsTest, Overlapping) {
   }
 
 TEST(filterCardsTest, NoOverlapping) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -805,7 +807,7 @@ TEST(filterCardsTest, NoOverlapping) {
   }
 
 TEST(filterCardsTest, Joker) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -829,7 +831,7 @@ TEST(filterCardsTest, Joker) {
   }
 
 TEST(filterCardsTest, Full) {
-  uecda_common::CommunicationBody src = {
+  uecda::common::CommunicationBody src = {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},

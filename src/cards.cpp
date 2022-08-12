@@ -1,6 +1,6 @@
 #include "cards.hpp"
 
-Cards::Cards(uecda_common::CommunicationBody src) {
+uecda::Cards::Cards(uecda::common::CommunicationBody src) {
   this->cards_ = 0;
 
   /* Joker。 */
@@ -23,7 +23,7 @@ Cards::Cards(uecda_common::CommunicationBody src) {
   this->cards_ >>= 1;
 }
 
-int Cards::getSuits() const {
+int uecda::Cards::getSuits() const {
   bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
@@ -39,11 +39,11 @@ int Cards::getSuits() const {
   return s;
 }
 
-int Cards::quantity() const {
+int uecda::Cards::quantity() const {
   return this->count(this->cards_);
 }
 
-int Cards::count(bitcards src) {
+int uecda::Cards::count(bitcards src) {
   /*
     32bitsの場合の例。
       tmp = 0b10010010100100011001001010110001
@@ -66,7 +66,7 @@ int Cards::count(bitcards src) {
   return (tmp & 0x00000000ffffffff) + (tmp >> 32 & 0x00000000ffffffff); // 64bits。
 }
 
-Cards::bitcards Cards::weakestOrder() const {
+uecda::Cards::bitcards uecda::Cards::weakestOrder() const {
   bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
@@ -90,7 +90,7 @@ Cards::bitcards Cards::weakestOrder() const {
   return tmp;
 }
 
-Cards::bitcards Cards::strongestOrder() const {
+uecda::Cards::bitcards uecda::Cards::strongestOrder() const {
   bitcards tmp = this->cards_;
   tmp &= 0xfffffffffffffff; // Jokerをビット列から落とす。
 
@@ -106,7 +106,7 @@ Cards::bitcards Cards::strongestOrder() const {
   return tmp & (-tmp);
 }
 
-void Cards::putCards(uecda_common::CommunicationBody dst) const {
+void uecda::Cards::putCards(uecda::common::CommunicationBody dst) const {
   bitcards src = this->cards_;
 
   /* Joker以外の各札。 */
@@ -121,7 +121,7 @@ void Cards::putCards(uecda_common::CommunicationBody dst) const {
 }
 
 
-void Cards::printCards(uecda_common::CommunicationBody src) {
+void uecda::Cards::printCards(uecda::common::CommunicationBody src) {
   std::cout << "-----------------------------------------------------------------------------\n"
                " |  * |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |  J |  Q |  K |  1 |  2 |  * |\n"
                "-----------------------------------------------------------------------------\n";

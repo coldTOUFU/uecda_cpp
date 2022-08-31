@@ -51,8 +51,8 @@ namespace uecda {
     /* デバッグ出力用に配列にカードを埋め込む。 */
     void putCards(uecda::common::CommunicationBody& dst) const;
 
-    /* デバッグ用に与えられたカードを出力。 */
-    static void printCards(uecda::common::CommunicationBody src);
+    /* デバッグ用にカードを出力。 */
+    void print();
 
     /* 与えられたカードを追加する。 */
     Cards& operator +=(const Cards &src) {

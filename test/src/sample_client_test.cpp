@@ -41,9 +41,9 @@ TEST(SelectHandTest, Game100) {
       std::cout << "場の状態" << std::endl;
       table.print();
       std::cout << "手札" << std::endl;
-      Cards::printCards(dealt_body);
+      common::printCommunicationBody(dealt_body);
       std::cout << "場札" << std::endl;
-      Cards::printCards(table_body);
+      common::printCommunicationBody(table_body);
       /* 手札・場の手を作る */
       Cards my_cards = Cards(dealt_body);
       Hand table_hand;
@@ -75,10 +75,10 @@ TEST(SelectHandTest, Game100) {
       }
 
       std::cout << "defaultの手" << std::endl;
-      Cards::printCards(dst_body);
+      common::printCommunicationBody(dst_body);
 
       std::cout << "実際の手" << std::endl;
-      Cards::printCards(submission_body);
+      common::printCommunicationBody(submission_body);
 
       /* ジョーカーを含む場合、ジョーカー以外の位置でみる */
       if (submission_hand.getSummary().has_joker && Hand(dst_body).getSummary().has_joker) {

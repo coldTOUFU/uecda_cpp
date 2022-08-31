@@ -93,7 +93,7 @@ int main(int argc, char* argv[]) {
         Hand::pushHands(my_cards, hands);
 
         /* 着手を決める。 */
-        Hand submission_hand = submission_hand = select_hand(hands, table_hand, table);
+        Hand submission_hand = select_hand(hands, table_hand, table);
 
         /* 提出用配列に着手を移す */
         uecda::common::CommunicationBody submission_body = {};

@@ -121,7 +121,10 @@ void uecda::Cards::putCards(uecda::common::CommunicationBody &dst) const {
 }
 
 
-void uecda::Cards::printCards(uecda::common::CommunicationBody src) {
+void uecda::Cards::print() {
+  common::CommunicationBody tmp = {};
+  this->putCards(tmp);
+
   std::cout << "-----------------------------------------------------------------------------\n"
                " |  * |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 |  J |  Q |  K |  1 |  2 |  * |\n"
                "-----------------------------------------------------------------------------\n";
@@ -145,9 +148,9 @@ void uecda::Cards::printCards(uecda::common::CommunicationBody src) {
     }
     for (int order = 0; order < 15; order++) {
       std::cout << "  ";
-      if (src.at(suit).at(order) == 1) {
+      if (tmp.at(suit).at(order) == 1) {
         std::cout << 1;
-      } else if (src.at(suit).at(order) == 2) {
+      } else if (tmp.at(suit).at(order) == 2) {
         std::cout << 2;
       } else {
         std:: cout << " ";

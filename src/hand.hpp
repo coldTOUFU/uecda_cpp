@@ -53,7 +53,7 @@ namespace uecda {
     void putCards(uecda::common::CommunicationBody& dst) const;
 
     /* デバッグ用に手を出力。 */
-    void printHand() const {
+    void print() const {
       uecda::common::CommunicationBody src = {{}};
       this->putCards(src);
       std::cout << std::endl;
@@ -62,7 +62,7 @@ namespace uecda {
       std::cout << (this->summary_.is_sequence ? "階段" : "n枚組");
       std::cout << std::endl;
       std::cout << "カードの枚数: " << this->summary_.quantity << std::endl;
-      Cards::printCards(src);
+      common::printCommunicationBody(src);
     }
 
    private:

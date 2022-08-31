@@ -1,6 +1,8 @@
 #ifndef TABLE_HPP_
 #define TABLE_HPP_
 
+#include <iostream>
+
 #include "uecda_common.hpp"
 
 namespace uecda {
@@ -17,6 +19,14 @@ namespace uecda {
         this->rank_of_players.at(i) = src.at(6).at(5 + i);
         this->player_num_on_seats.at(i) = src.at(6).at(10 + i);
       }
+    }
+
+    void print() {
+      std::cout << "自分のターン？: " << (this->is_my_turn ? "YES" : "NO") << std::endl;
+      std::cout << "誰のターン: " << (this->whose_turn) << std::endl;
+      std::cout << "場に何もない？" << (this->is_start_of_trick ? "YES" : "NO") << std::endl;
+      std::cout << "革命中？" << (this->is_rev ? "YES" : "NO") << std::endl;
+      std::cout << "縛り中？" << (this->is_lock ? "YES" : "NO") << std::endl;
     }
 
     bool is_my_turn;                             // 自分のターンか？

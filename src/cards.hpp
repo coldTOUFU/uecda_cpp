@@ -49,7 +49,7 @@ namespace uecda {
     bitcards strongestOrder() const;
 
     /* デバッグ出力用に配列にカードを埋め込む。 */
-    void putCards(uecda::common::CommunicationBody dst) const;
+    void putCards(uecda::common::CommunicationBody& dst) const;
 
     /* デバッグ用に与えられたカードを出力。 */
     static void printCards(uecda::common::CommunicationBody src);

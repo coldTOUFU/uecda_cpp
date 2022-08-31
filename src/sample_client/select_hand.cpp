@@ -20,7 +20,7 @@ std::vector<Hand> select_change_hands(std::vector<Hand> &hands) {
 
 /* 手の枚数と強さの観点のみから最善の手を選ぶ。 */
 Hand &select_best_hand_in_same_hand_type(std::vector<Hand> &hands, bool is_rev) {
-  Hand &best_hand = hands[0];
+  Hand &best_hand = hands.at(0);
   for (Hand &hand : hands) {
     const HandSummary &best_summary = best_hand.getSummary();
     const HandSummary &cur_summary = hand.getSummary();

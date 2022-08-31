@@ -5,8 +5,8 @@ SRCS			= $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp)
 OBJS			= $(subst $(SRCDIR), $(OBJDIR), $(SRCS:.cpp=.o))
 TARGET			= $(OUTDIR)/main
 CC				= g++
-CFLAGS			= -Wall -O2
-CFLAGS_DEBUG	= -Wall -O0 -g
+CFLAGS			= -std=c++17 -Wall -O2
+CFLAGS_DEBUG	= -std=c++17 -Wall -O0 -g
 
 main: $(TARGET)
 
@@ -25,7 +25,7 @@ TEST_OUTDIR		= $(TESTDIR)/out
 TEST_EXTDIR		= $(TESTDIR)/external
 TEST_SRCS		= $(wildcard $(TEST_SRCDIR)/*.cpp)
 TEST_TARGETS	= $(subst $(TEST_SRCDIR), $(TEST_OUTDIR), $(TEST_SRCS:.cpp=))
-TEST_CFLAGS		= -Wall -pthread -lgtest_main -lgtest
+TEST_CFLAGS		= -std=c++17 -Wall -pthread -lgtest_main -lgtest
 
 test: $(TEST_TARGETS)
 

@@ -24,18 +24,18 @@ int main(int argc, char* argv[]) {
   /* ラウンドの繰り返し */
   while (!is_game_end) {
     is_round_end = false;
-    uecda::common::CommunicationBody dealt_body = {{}};
-    uecda::common::CommunicationBody table_body = {{}};
+    uecda::common::CommunicationBody dealt_body = {};
+    uecda::common::CommunicationBody table_body = {};
 
     /* 交換前の手札を受け取る */
     client.receiveMyInitialCards(dealt_body);
 
     /* 交換 */
-    if (dealt_body[5][0] == 0) {
+    if (dealt_body.at(5).at(0) == 0) {
       std::cerr << "ラウンド開始時ですが、カード交換フラグが立っていません。\n";
       return 1;
     }
-    const int qty_to_change = dealt_body[5][1];
+    const int qty_to_change = dealt_body.at(5).at(1);
     if (qty_to_change == 0) {
       /* 平民以下なので何もしない。 */
     } else if (qty_to_change <= 2 && qty_to_change > 0) {
@@ -48,16 +48,16 @@ int main(int argc, char* argv[]) {
       std::vector<Hand> submission_hands = select_change_hands(hands);
 
       /* 提出用配列に着手を移す */
-      uecda::common::CommunicationBody submission_body1 = {{}};
-      uecda::common::CommunicationBody submission_body2 = {{}};
-      submission_hands[0].putCards(submission_body1);
+      uecda::common::CommunicationBody submission_body1 = {};
+      uecda::common::CommunicationBody submission_body2 = {};
+      submission_hands.at(0).putCards(submission_body1);
       if (qty_to_change >= 2) {
-        submission_hands[1].putCards(submission_body2);
+        submission_hands.at(1).putCards(submission_body2);
       }
       for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 15; j++) {
-          if (submission_body2[i][j] == 1) {
-            submission_body1[i][j] = 1;
+          if (submission_body2.at(i).at(j) == 1) {
+            submission_body1.at(i).at(j) = 1;
           }
         }
       }
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
         }
 
         /* 提出用配列に着手を移す */
-        uecda::common::CommunicationBody submission_body = {{}};
+        uecda::common::CommunicationBody submission_body = {};
         submission_hand.putCards(submission_body);
 
         /* カードを提出 */

@@ -1,0 +1,7 @@
+/**/*.o
+/**/Makefile
+/**/config.status
+/server
+/client
+/client_for_logging/client
+

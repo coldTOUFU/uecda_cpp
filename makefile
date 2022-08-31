@@ -35,5 +35,8 @@ $(TEST_OUTDIR)/cards_test:	$(TEST_SRCDIR)/cards_test.cpp $(OBJDIR)/uecda_common.
 $(TEST_OUTDIR)/hand_test:	$(TEST_SRCDIR)/hand_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/hand.o $(OBJDIR)/cards.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
+$(TEST_OUTDIR)/sample_client_test:	$(TEST_SRCDIR)/sample_client_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/hand.o $(OBJDIR)/cards.o $(OBJDIR)/sample_client/select_hand.o
+	$(CC) $(TEST_CFLAGS) -o $@ $^
+
 clean:
 	rm -f ./out/main ./out/obj/**/*.o ./out/obj/*.o ./test/out/*

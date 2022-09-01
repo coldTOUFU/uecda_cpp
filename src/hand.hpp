@@ -56,12 +56,7 @@ namespace uecda {
     void print() const {
       uecda::common::CommunicationBody src = {{}};
       this->putCards(src);
-      std::cout << std::endl;
-      std::cout << "カードの種類: ";
-      std::cout << (this->summary_.is_pass ? "パス" : "");
-      std::cout << (this->summary_.is_sequence ? "階段" : "n枚組");
-      std::cout << std::endl;
-      std::cout << "カードの枚数: " << this->summary_.quantity << std::endl;
+      this->summary_.print();
       common::printCommunicationBody(src);
     }
 

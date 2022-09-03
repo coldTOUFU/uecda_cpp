@@ -41,7 +41,7 @@ bool uecda::Hand::isLegal(const Table &tbl, const Hand &table_hand) const {
 }
 
 void uecda::Hand::pushHands(const Cards &src, std::vector<Hand> &hand_vec) {
-  Cards::bitcards src_bit = src.getCard();
+  Cards::bitcards src_bit = src.toBitcards();
   /* 手探索でフィルターにかけるとき邪魔なので、ジョーカーのビットを落とす。  */
   src_bit &= 0xfffffffffffffff;
 
@@ -70,8 +70,8 @@ void uecda::Hand::pushHands(const Cards &src, std::vector<Hand> &hand_vec) {
 }
 
 void uecda::Hand::putCards(uecda::common::CommunicationBody& dst) const {
-  Cards::bitcards src = this->cards_.getCard();
-  Cards::bitcards src_joker = this->joker_.getCard();
+  Cards::bitcards src = this->cards_.toBitcards();
+  Cards::bitcards src_joker = this->joker_.toBitcards();
 
   for (int i = 3; i >= 0; i--) {
     for (int j = 14; j >= 0; j--) {
@@ -132,9 +132,9 @@ uecda::HandSummary uecda::Hand::summarize(Cards::bitcards src, Cards::bitcards j
   Cards::bitcards w_ord = std::max(src_card.weakestOrder(), joker_src_card.weakestOrder());
   /* s_ordについては、カードが空の場合見かけ上その強さが0(最強よりも強い)になるので、カードが空かどうかで場合分けする。 */
   Cards::bitcards s_ord;
-  if (src_card.getCard() <= 0) {
+  if (src_card.toBitcards() <= 0) {
     s_ord = joker_src_card.strongestOrder();
-  } else if (joker_src_card.getCard() <= 0) {
+  } else if (joker_src_card.toBitcards() <= 0) {
     s_ord = src_card.strongestOrder();
   } else {
     s_ord = std::min(src_card.strongestOrder(), joker_src_card.strongestOrder());

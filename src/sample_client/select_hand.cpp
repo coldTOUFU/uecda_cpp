@@ -84,16 +84,15 @@ Hand select_hand(std::vector<Hand> &hands, const Hand &table_hand, const Table &
     /* *_excluded_cardsに含まれるカードがあるなら、手を出さない。 */
     /* ただし、(オリジナルのdefaultでそうしているので、)縛り中は気にしない。 */
     if (!table.is_lock && summary.is_sequence &&
-        sequence_excluded_cards.filterCards(hand.getCards().getCard()) != (Cards::bitcards)0) {
+        sequence_excluded_cards.hasAnyOf(hand.getCards())) {
       continue;
     } else if (!table.is_lock &&
-               pair_excluded_cards.filterCards(hand.getCards().getCard()) != (Cards::bitcards)0) {
+               pair_excluded_cards.hasAnyOf(hand.getCards())) {
       continue;
     }
     /* 1枚出しの場合は、縛りがあってもペアや階段を崩さないようにする。 */
     if (summary.quantity == 1 &&
-        (sequence_excluded_cards.filterCards(hand.getCards().getCard()) != (Cards::bitcards)0 ||
-        pair_excluded_cards.filterCards(hand.getCards().getCard()) != (Cards::bitcards)0)) {
+        (sequence_excluded_cards.hasAnyOf(hand.getCards()) || pair_excluded_cards.hasAnyOf(hand.getCards()))) {
       continue;
     }
 

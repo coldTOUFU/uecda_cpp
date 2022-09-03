@@ -17,7 +17,7 @@ namespace uecda {
     Hand(): cards_(), joker_(), summary_(Hand::summarize({}, {})) {};
 
     /* 配列形式のカードから手を生成。 */
-    Hand(const uecda::common::CommunicationBody src): cards_(Hand::createCards(src)), joker_(Hand::createJoker(src)), summary_(Hand::summarize(cards_.getCard(), joker_.getCard())) {};
+    Hand(const uecda::common::CommunicationBody src): cards_(Hand::createCards(src)), joker_(Hand::createJoker(src)), summary_(Hand::summarize(cards_.toBitcards(), joker_.toBitcards())) {};
 
     /* ビットカードから手を生成。 */
     Hand(const Cards::bitcards src, const Cards::bitcards joker_src, const HandSummary& hs): cards_(Cards(src)), joker_(Cards(joker_src)), summary_(HandSummary(hs)) {};

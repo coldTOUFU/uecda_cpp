@@ -449,7 +449,7 @@ TEST(AddCardsTest, Overlapping) {
   EXPECT_EQ(dst, result);
 }
 
-TEST(AddCardsTest, NoOverlapping) {
+TEST(AddCardsTest, NotOverlapping) {
   uecda::common::CommunicationBody src = {{
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -573,7 +573,7 @@ TEST(SubCardsTest, Overlapping) {
   EXPECT_EQ(dst, result);
 }
 
-TEST(SubCardsTest, NoOverlapping) {
+TEST(SubCardsTest, NotOverlapping) {
   uecda::common::CommunicationBody src = {{
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -983,7 +983,7 @@ TEST(FilterCardsTest, Overlapping) {
   EXPECT_EQ(dst, result);
 }
 
-TEST(FilterCardsTest, NoOverlapping) {
+TEST(FilterCardsTest, NotOverlapping) {
   uecda::common::CommunicationBody src = {{
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},

@@ -105,6 +105,11 @@ namespace uecda {
       return (this->cards_ & filter);
     }
 
+    /* ジョーカーを除く。ジョーカーはワイルドカードでどかしづらいため。 */
+    void deleteJoker() {
+      this->cards_ &= 0xfffffffffffffff;
+    }
+
    private:
     bitcards cards_;
   };

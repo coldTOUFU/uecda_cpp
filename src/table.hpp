@@ -34,7 +34,6 @@ namespace uecda {
     bool is_start_of_trick;                      // 場に何もないか？
     bool is_rev;                                 // 革命中？
     bool is_lock;                                // 縛り中？
-    std::array<bool, 5> has_passed;              // 各プレイヤがパスをしたか(ユーザが自分で更新するメンバ)。
     std::array<int, 5> card_quantity_of_players; // 各プレイヤのカード枚数。
     std::array<bool, 5> is_out;                  // 各プレイヤがあがったか。
     std::array<int, 5> rank_of_players;          // 各プレイヤの現階級。

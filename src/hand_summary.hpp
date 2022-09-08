@@ -24,6 +24,16 @@ namespace uecda {
       std::cout << "ジョーカーあり？: " << (this->has_joker ? "YES" : "NO") << std::endl;
       std::cout << "スート: " << std::bitset<4>(suits) << std::endl;
     }
+
+    bool operator ==(const HandSummary &src) const {
+      return quantity == src.quantity &&
+          is_pass == src.is_pass &&
+          is_sequence == src.is_sequence &&
+          weakest_order == src.weakest_order &&
+          strongest_order == src.strongest_order &&
+          has_joker == src.has_joker &&
+          suits == src.suits;
+    }
   };
 }
 

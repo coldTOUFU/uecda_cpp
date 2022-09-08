@@ -60,6 +60,10 @@ namespace uecda {
       common::printCommunicationBody(src);
     }
 
+    bool operator ==(const Hand &src) const {
+      return cards_ == src.cards_ && joker_ == src.joker_ && summary_ == src.summary_;
+    }
+
    private:
     static constexpr std::array<int, 4> kPairFilterSize = {4, 6, 4, 1};
     static constexpr std::array<std::array<Cards::bitcards, 6>, 4> kPairFilters = {{

@@ -29,13 +29,13 @@ TEST_CFLAGS		= -std=c++17 -Wall -pthread -lgtest_main -lgtest
 
 test: $(TEST_TARGETS)
 
-$(TEST_OUTDIR)/cards_test:	$(TEST_SRCDIR)/cards_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/cards.o
+$(TEST_OUTDIR)/cards_test:	$(TEST_SRCDIR)/cards_test.cpp $(OBJDIR)/cards.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
-$(TEST_OUTDIR)/hand_test:	$(TEST_SRCDIR)/hand_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/hand.o $(OBJDIR)/cards.o
+$(TEST_OUTDIR)/hand_test:	$(TEST_SRCDIR)/hand_test.cpp $(OBJDIR)/hand.o $(OBJDIR)/cards.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
-$(TEST_OUTDIR)/sample_client_test:	$(TEST_SRCDIR)/sample_client_test.cpp $(OBJDIR)/uecda_common.o $(OBJDIR)/hand.o $(OBJDIR)/cards.o $(OBJDIR)/sample_client/select_hand.o
+$(TEST_OUTDIR)/sample_client_test:	$(TEST_SRCDIR)/sample_client_test.cpp $(OBJDIR)/hand.o $(OBJDIR)/cards.o $(OBJDIR)/sample_client/select_hand.o
 	$(CC) $(TEST_CFLAGS) -o $@ $^
 
 clean:

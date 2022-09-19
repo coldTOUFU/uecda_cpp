@@ -82,8 +82,10 @@ namespace uecda {
       }
       os << std::endl;
       os << "  上がったプレイヤ: ";
-      for (const auto e: src.is_out) {
-        os << e << " ";
+      for (unsigned int i = 0; i < src.is_out.size(); i++) {
+        if (src.is_out.at(i)) {
+          os << i << " ";
+        }
       }
       os << std::endl;
       os << "  各プレイヤの現階級: ";
@@ -102,3 +104,4 @@ namespace uecda {
 }
 
 #endif // TABLE_HPP_
+

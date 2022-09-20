@@ -14,18 +14,18 @@
 using namespace uecda;
 
 int main(int argc, char* argv[]) {
-  bool is_round_end = false;
-  bool is_game_end = false;
+  bool is_round_end{false};
+  bool is_game_end{false};
 
   /* ゲームに参加 */
-  UECdaClient client = UECdaClient();
+  UECdaClient client{};
   client.enterGame();
 
   /* ラウンドの繰り返し */
   while (!is_game_end) {
     is_round_end = false;
-    uecda::common::CommunicationBody dealt_body = {};
-    uecda::common::CommunicationBody table_body = {};
+    uecda::common::CommunicationBody dealt_body{};
+    uecda::common::CommunicationBody table_body{};
 
     /* 交換前の手札を受け取る */
     client.receiveMyInitialCards(dealt_body);
@@ -35,21 +35,21 @@ int main(int argc, char* argv[]) {
       std::cerr << "ラウンド開始時ですが、カード交換フラグが立っていません。\n";
       return 1;
     }
-    const int qty_to_change = dealt_body.at(5).at(1);
+    const int qty_to_change{dealt_body.at(5).at(1)};
     if (qty_to_change == 0) {
       /* 平民以下なので何もしない。 */
     } else if (qty_to_change <= 2 && qty_to_change > 0) {
       /* 手札を作る */
-      const Cards my_cards = Cards(dealt_body);
-      std::vector<Hand> hands(0);
+      const Cards my_cards{dealt_body};
+      std::vector<Hand> hands{};
       Hand::pushHands(my_cards, hands);
 
       /* 交換するカードを決める */
-      std::vector<Hand> submission_hands = select_change_hands(hands);
+      const std::vector<Hand> submission_hands = select_change_hands(hands);
 
       /* 提出用配列に着手を移す */
-      uecda::common::CommunicationBody submission_body1 = {};
-      uecda::common::CommunicationBody submission_body2 = {};
+      uecda::common::CommunicationBody submission_body1{};
+      uecda::common::CommunicationBody submission_body2{};
       submission_hands.at(0).putCards(submission_body1);
       if (qty_to_change >= 2) {
         submission_hands.at(1).putCards(submission_body2);
@@ -65,8 +65,7 @@ int main(int argc, char* argv[]) {
       /* 交換用カードを提出 */
       client.sendExchangeCards(submission_body1);
     } else {
-      std::cerr << "要求されたカード交換枚数が異常です: " << qty_to_change
-                << std::endl;
+      std::cerr << "要求されたカード交換枚数が異常です: " << qty_to_change << std::endl;
       return 1;
     }
 
@@ -75,32 +74,27 @@ int main(int argc, char* argv[]) {
       /* 自分の手札を受け取る */
       client.receiveMyCards(dealt_body);
       /* 場の情報を取得 */
-      Table table = Table(dealt_body);
+      Table table{dealt_body};
 
       /* 着手 */
       if (table.is_my_turn) {
         /* 手札・場の手を作る */
-        Cards my_cards = Cards(dealt_body);
-        Hand table_hand;
-        if (table.is_start_of_trick) {
-          table_hand = Hand();
-        } else {
-          table_hand = Hand(table_body);
-        }
+        Cards my_cards{dealt_body};
+        Hand table_hand{table.is_start_of_trick ? Hand() : Hand(table_body)};
 
         /* 手の候補を作る */
-        std::vector<Hand> hands;
+        std::vector<Hand> hands{};
         Hand::pushHands(my_cards, hands);
 
         /* 着手を決める。 */
-        Hand submission_hand = select_hand(hands, table_hand, table);
+        Hand submission_hand{select_hand(hands, table_hand, table)};
 
         /* 提出用配列に着手を移す */
-        uecda::common::CommunicationBody submission_body = {};
+        uecda::common::CommunicationBody submission_body{};
         submission_hand.putCards(submission_body);
 
         /* カードを提出 */
-        const bool is_submit_accepted = client.sendSubmissionCards(submission_body);
+        const bool is_submit_accepted{client.sendSubmissionCards(submission_body)};
         if (!submission_hand.getSummary().is_pass && !is_submit_accepted) { // パスの場合も不受理判定になるので弾く。
           std::cerr << "提出カードが受理されませんでした。" << std::endl;
         }

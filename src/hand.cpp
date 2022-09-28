@@ -10,9 +10,8 @@ bool uecda::Hand::isLegal(const Table &tbl, const Hand &table_hand) const {
   if (this->summary_.quantity == 1 && table_hand_summary.quantity == 1 && this->summary_.has_joker) { return true; }
 
   /* 相手がジョーカー1枚出しなら、スぺ3返し以外はできない。 */
-  constexpr Cards::bitcards spade3_filter{((Cards::bitcards)0b010000000000000 << 45)};
   if (table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
-    return this->summary_.quantity == 1 && this->cards_.filterCards(spade3_filter) != (Cards::bitcards)0;
+    return this->summary_.quantity == 1 && this->cards_.filterCards(Cards::S3) != (Cards::bitcards)0;
   }
 
   /* 場と同じ種類の手である必要がある。 */

@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
       std::cerr << "ラウンド開始時ですが、カード交換フラグが立っていません。\n";
       return 1;
     }
-    const int qty_to_change{dealt_body.at(5).at(1)};
+    const unsigned int qty_to_change{dealt_body.at(5).at(1)};
     if (qty_to_change == 0) {
       /* 平民以下なので何もしない。 */
     } else if (qty_to_change <= 2 && qty_to_change > 0) {

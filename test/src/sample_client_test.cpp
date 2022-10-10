@@ -45,7 +45,7 @@ TEST(SelectHandTest, Game100) {
       std::cout << "場札" << std::endl;
       std::cout << table_body;
       /* 手札・場の手を作る */
-      Cards my_cards = Cards(dealt_body);
+      Cards my_cards = Cards(Cards::communicationBody2Cards(dealt_body));
       Hand table_hand;
       if (table.is_start_of_trick) {
         table_hand = Hand();

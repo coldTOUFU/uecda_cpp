@@ -817,7 +817,7 @@ TEST(PushHandsTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Cards my_cards = Cards(src);
+  Cards my_cards = Cards(Cards::communicationBody2Cards(src));
   std::vector<Hand> hands;
   Hand::pushHands(my_cards, hands);
   Hand src_hand = Hand();
@@ -849,7 +849,7 @@ TEST(PushHandsTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Cards my_cards = Cards(src);
+  Cards my_cards = Cards(Cards::communicationBody2Cards(src));
   std::vector<Hand> hands;
   Hand::pushHands(my_cards, hands);
   Hand src_hand = Hand();
@@ -881,7 +881,7 @@ TEST(PushHandsTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Cards my_cards = Cards(src);
+  Cards my_cards = Cards(Cards::communicationBody2Cards(src));
   std::vector<Hand> hands;
   Hand::pushHands(my_cards, hands);
   Hand src_hand = Hand();
@@ -913,7 +913,7 @@ TEST(PushHandsTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Cards my_cards = Cards(src);
+  Cards my_cards = Cards(Cards::communicationBody2Cards(src));
   std::vector<Hand> hands;
   Hand::pushHands(my_cards, hands);
   Hand src_hand = Hand();

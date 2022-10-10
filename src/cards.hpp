@@ -76,6 +76,8 @@ namespace uecda {
     static constexpr bitcards kDiamondCards {D3 | D4 | D5 | D6 | D7 | D8 | D9 | D10 | D11 | D12 | D1 | D2 };
     static constexpr bitcards kCloverCards {C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | C11 | C12 | C1 | C2 };
 
+    static Cards communicationBody2Cards(const uecda::common::CommunicationBody& src);
+
     /* カード全体。 */
     static Cards all() {
       return Cards((bitcards)0b1'011111111111110'011111111111110'011111111111110'011111111111110);
@@ -83,9 +85,6 @@ namespace uecda {
 
     /* 空のカード。 */
     Cards() {}
-
-    /* 配列形式のカードから生成。 */
-    Cards(const uecda::common::CommunicationBody& src);
 
     /* ビットカードから生成。 */
     Cards(const bitcards src) { this->cards_ = src; }

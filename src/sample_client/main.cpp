@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
       /* 平民以下なので何もしない。 */
     } else if (qty_to_change <= 2 && qty_to_change > 0) {
       /* 手札を作る */
-      const Cards my_cards{dealt_body};
+      const Cards my_cards{Cards::communicationBody2Cards(dealt_body)};
       std::vector<Hand> hands{};
       Hand::pushHands(my_cards, hands);
 
@@ -79,7 +79,8 @@ int main(int argc, char* argv[]) {
       /* 着手 */
       if (table.is_my_turn) {
         /* 手札・場の手を作る */
-        Cards my_cards{dealt_body};
+
+        Cards my_cards{Cards::communicationBody2Cards(dealt_body)};
         Hand table_hand{table.is_start_of_trick ? Hand() : Hand(table_body)};
 
         /* 手の候補を作る */

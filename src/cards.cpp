@@ -1,26 +1,27 @@
 #include "cards.hpp"
 
-uecda::Cards::Cards(const uecda::common::CommunicationBody& src) {
-  this->cards_ = 0;
+uecda::Cards uecda::Cards::communicationBody2Cards(const uecda::common::CommunicationBody& src) {
+  bitcards cards{};
 
   /* Joker。 */
   if (src.at(4).at(1) == 2) {
-    this->cards_++;
+    cards++;
   }
-  this->cards_ <<= 1;
+  cards <<= 1;
 
   /* Joker以外の各札。 */
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 15; j++) {
       if (src.at(i).at(j) == 1) {
-        this->cards_++;
+        cards++;
       }
-      this->cards_ <<= 1;
+      cards <<= 1;
     }
   }
 
   /* 上で余計に1回左シフトした分を戻す。 */
-  this->cards_ >>= 1;
+  cards >>= 1;
+  return cards;
 }
 
 int uecda::Cards::getSuits() const {

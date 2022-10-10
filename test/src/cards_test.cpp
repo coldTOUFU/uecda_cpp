@@ -29,7 +29,7 @@ TEST(CountTest, Full) {
 
 TEST(ToBitcardsTest, Empty) {
   uecda::common::CommunicationBody src = {};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0, cards.toBitcards());
 }
@@ -42,7 +42,7 @@ TEST(ToBitcardsTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards dst = 0b0\
 000010000000000\
 000001000000000\
@@ -61,7 +61,7 @@ TEST(ToBitcardsTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards dst = 0b1\
 111111111111111\
 111111111111111\
@@ -73,7 +73,7 @@ TEST(ToBitcardsTest, Full) {
 
 TEST(GetSuits, Empty) {
   uecda::common::CommunicationBody src = {};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0, cards.getSuits());
 }
@@ -86,7 +86,7 @@ TEST(GetSuits, OneSpade) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b1000, cards.getSuits());
 }
@@ -99,7 +99,7 @@ TEST(GetSuits, OneHeart) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b0100, cards.getSuits());
 }
@@ -112,7 +112,7 @@ TEST(GetSuits, OneDiamond) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b0010, cards.getSuits());
 }
@@ -125,7 +125,7 @@ TEST(GetSuits, OneClover) {
     {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b0001, cards.getSuits());
 }
@@ -138,7 +138,7 @@ TEST(GetSuits, Two) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b1010, cards.getSuits());
 }
@@ -151,7 +151,7 @@ TEST(GetSuits, Three) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b1110, cards.getSuits());
 }
@@ -164,7 +164,7 @@ TEST(GetSuits, All) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b1111, cards.getSuits());
 }
@@ -178,14 +178,14 @@ TEST(GetSuits, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b1111, cards.getSuits());
 }
 
 TEST(QuantityTest, Empty) {
   uecda::common::CommunicationBody src = {};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0, cards.quantity());
 }
@@ -198,7 +198,7 @@ TEST(QuantityTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(4, cards.quantity());  
 }
@@ -212,7 +212,7 @@ TEST(QuantityTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(61, cards.quantity());
 }
@@ -225,7 +225,7 @@ TEST(HasJokerTest, False) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_FALSE(cards.hasJoker());
 }
@@ -238,7 +238,7 @@ TEST(HasJokerTest, True) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_TRUE(cards.hasJoker());
 }
@@ -251,7 +251,7 @@ TEST(WeakestOrderTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0, cards.weakestOrder());
 }
@@ -264,7 +264,7 @@ TEST(WeakestOrderTest, Weakest) {
     {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   
   EXPECT_EQ(0b100000000000000, cards.weakestOrder());
 }
@@ -277,7 +277,7 @@ TEST(WeakestOrderTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   
   EXPECT_EQ(0b000010000000000, cards.weakestOrder());
 }
@@ -290,7 +290,7 @@ TEST(WeakestOrderTest, Strongest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   
   EXPECT_EQ(0b000000000000001, cards.weakestOrder());
   }
@@ -303,7 +303,7 @@ TEST(StrongestOrderTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0, cards.strongestOrder());
 }
@@ -316,7 +316,7 @@ TEST(StrongestOrderTest, Weakest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b100000000000000, cards.strongestOrder());
   }
@@ -329,7 +329,7 @@ TEST(StrongestOrderTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   
   EXPECT_EQ(0b000000010000000, cards.strongestOrder());
 }
@@ -342,14 +342,14 @@ TEST(StrongestOrderTest, Strongest) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
 
   EXPECT_EQ(0b000000000000001, cards.strongestOrder());
   }
 
 TEST(PutCardsTest, Empty) {
   uecda::common::CommunicationBody src = {};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
 
@@ -364,7 +364,7 @@ TEST(PutCardsTest, Normal) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
 
@@ -380,7 +380,7 @@ TEST(PutCardsTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
 
@@ -409,8 +409,8 @@ TEST(AddCardsTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards plus_cards = Cards(plus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards plus_cards = Cards(Cards::communicationBody2Cards(plus_body));
   cards += plus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -440,8 +440,8 @@ TEST(AddCardsTest, Overlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards plus_cards = Cards(plus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards plus_cards = Cards(Cards::communicationBody2Cards(plus_body));
   cards += plus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -471,8 +471,8 @@ TEST(AddCardsTest, NotOverlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards plus_cards = Cards(plus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards plus_cards = Cards(Cards::communicationBody2Cards(plus_body));
   cards += plus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -502,8 +502,8 @@ TEST(AddCardsTest, Full) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards plus_cards = Cards(plus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards plus_cards = Cards(Cards::communicationBody2Cards(plus_body));
   cards += plus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -533,8 +533,8 @@ TEST(SubCardsTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards minus_cards = Cards(minus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards minus_cards = Cards(Cards::communicationBody2Cards(minus_body));
   cards -= minus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -564,8 +564,8 @@ TEST(SubCardsTest, Overlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards minus_cards = Cards(minus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards minus_cards = Cards(Cards::communicationBody2Cards(minus_body));
   cards -= minus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -595,8 +595,8 @@ TEST(SubCardsTest, NotOverlapping) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards minus_cards = Cards(minus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards minus_cards = Cards(Cards::communicationBody2Cards(minus_body));
   cards -= minus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -626,8 +626,8 @@ TEST(SubCardsTest, Full) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards minus_cards = Cards(minus_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards minus_cards = Cards(Cards::communicationBody2Cards(minus_body));
   cards -= minus_cards;
   uecda::common::CommunicationBody result = {};
   cards.putCards(result);
@@ -650,8 +650,8 @@ TEST(EqualityOfCardsTest, EmptyTrue) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_TRUE(cards == dst_cards);
   EXPECT_FALSE(cards != dst_cards);
@@ -672,8 +672,8 @@ TEST(EqualityOfCardsTest, EmptyFalse) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_FALSE(cards == dst_cards);
   EXPECT_TRUE(cards != dst_cards);
@@ -694,8 +694,8 @@ TEST(EqualityOfCardsTest, NormalTrue) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_TRUE(cards == dst_cards);
   EXPECT_FALSE(cards != dst_cards);
@@ -716,8 +716,8 @@ TEST(EqualityOfCardsTest, NormalFalse) {
     {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_FALSE(cards == dst_cards);
   EXPECT_TRUE(cards != dst_cards);
@@ -738,8 +738,8 @@ TEST(EqualityOfCardsTest, FullTrue) {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_TRUE(cards == dst_cards);
   EXPECT_FALSE(cards != dst_cards);
@@ -760,8 +760,8 @@ TEST(EqualityOfCardsTest, FullFalse) {
     {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards cards = Cards(src);
-  Cards dst_cards = Cards(dst_body);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
+  Cards dst_cards = Cards(Cards::communicationBody2Cards(dst_body));
 
   EXPECT_FALSE(cards == dst_cards);
   EXPECT_TRUE(cards != dst_cards);
@@ -782,8 +782,8 @@ TEST(hasAllOfTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAllOf(r_value));
 }
@@ -803,8 +803,8 @@ TEST(hasAllOfTest, NormalTrue) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAllOf(r_value));
 }
@@ -824,8 +824,8 @@ TEST(hasAllOfTest, NormalFalse) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_FALSE(l_value.hasAllOf(r_value));
 }
@@ -845,8 +845,8 @@ TEST(hasAllOfTest, Full) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAllOf(r_value));
 }
@@ -866,8 +866,8 @@ TEST(HasAnyOfTest, Empty) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAnyOf(r_value));
 }
@@ -887,8 +887,8 @@ TEST(HasAnyOfTest, NormalTrue) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAnyOf(r_value));
 }
@@ -908,8 +908,8 @@ TEST(HasAnyOfTest, NormalFalse) {
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_FALSE(l_value.hasAnyOf(r_value));
 }
@@ -929,8 +929,8 @@ TEST(HasAnyOfTest, Full) {
     {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
     {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
   }};
-  Cards l_value = Cards(l_body);
-  Cards r_value = Cards(r_body);
+  Cards l_value = Cards(Cards::communicationBody2Cards(l_body));
+  Cards r_value = Cards(Cards::communicationBody2Cards(r_body));
 
   EXPECT_TRUE(l_value.hasAnyOf(r_value));
 }
@@ -953,7 +953,7 @@ TEST(FilterCardsTest, Empty) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
@@ -977,7 +977,7 @@ TEST(FilterCardsTest, Overlapping) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
@@ -1001,7 +1001,7 @@ TEST(FilterCardsTest, NotOverlapping) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
@@ -1025,7 +1025,7 @@ TEST(FilterCardsTest, Joker) {
 000000000000000\
 000000000000000\
 000000000000000;
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);
@@ -1049,7 +1049,7 @@ TEST(FilterCardsTest, Full) {
 000001000000000\
 000000100000000\
 000000010000000;
-  Cards cards = Cards(src);
+  Cards cards = Cards(Cards::communicationBody2Cards(src));
   Cards::bitcards result = cards.filterCards(filter);
 
   EXPECT_EQ(dst, result);

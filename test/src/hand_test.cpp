@@ -12,7 +12,7 @@ TEST(IsLegalTest, LegalSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -22,7 +22,7 @@ TEST(IsLegalTest, LegalSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -35,7 +35,7 @@ TEST(IsLegalTest, LegalSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -45,7 +45,7 @@ TEST(IsLegalTest, LegalSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -58,7 +58,7 @@ TEST(IsLegalTest, IllegalEqualSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -68,7 +68,7 @@ TEST(IsLegalTest, IllegalEqualSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -81,7 +81,7 @@ TEST(IsLegalTest, IllegalEqualSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -91,7 +91,7 @@ TEST(IsLegalTest, IllegalEqualSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -104,7 +104,7 @@ TEST(IsLegalTest, IllegalWeakSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -114,7 +114,7 @@ TEST(IsLegalTest, IllegalWeakSingle) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -127,7 +127,7 @@ TEST(IsLegalTest, IllegalWeakSingleRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -137,7 +137,7 @@ TEST(IsLegalTest, IllegalWeakSingleRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -150,7 +150,7 @@ TEST(IsLegalTest, LegalPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -160,7 +160,7 @@ TEST(IsLegalTest, LegalPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -173,7 +173,7 @@ TEST(IsLegalTest, LegalPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -183,7 +183,7 @@ TEST(IsLegalTest, LegalPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -196,7 +196,7 @@ TEST(IsLegalTest, IllegalDifferentQuantityPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -206,7 +206,7 @@ TEST(IsLegalTest, IllegalDifferentQuantityPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -219,7 +219,7 @@ TEST(IsLegalTest, LegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -229,7 +229,7 @@ TEST(IsLegalTest, LegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -242,7 +242,7 @@ TEST(IsLegalTest, IllegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -252,7 +252,7 @@ TEST(IsLegalTest, IllegalPairLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -265,7 +265,7 @@ TEST(IsLegalTest, IllegalEqualPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -275,7 +275,7 @@ TEST(IsLegalTest, IllegalEqualPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -288,7 +288,7 @@ TEST(IsLegalTest, IllegalEqualPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -298,7 +298,7 @@ TEST(IsLegalTest, IllegalEqualPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -311,7 +311,7 @@ TEST(IsLegalTest, IllegalWeakPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -321,7 +321,7 @@ TEST(IsLegalTest, IllegalWeakPair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -334,7 +334,7 @@ TEST(IsLegalTest, IllegalWeakPairRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -344,7 +344,7 @@ TEST(IsLegalTest, IllegalWeakPairRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -357,7 +357,7 @@ TEST(IsLegalTest, LegalSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
@@ -367,7 +367,7 @@ TEST(IsLegalTest, LegalSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -380,7 +380,7 @@ TEST(IsLegalTest, LegalSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -390,7 +390,7 @@ TEST(IsLegalTest, LegalSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -403,7 +403,7 @@ TEST(IsLegalTest, LegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -413,7 +413,7 @@ TEST(IsLegalTest, LegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -426,7 +426,7 @@ TEST(IsLegalTest, IllegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0},
@@ -436,7 +436,7 @@ TEST(IsLegalTest, IllegalSequenceLocked) {
       {0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -449,7 +449,7 @@ TEST(IsLegalTest, IllegalDifferentQuantitySequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0},
@@ -459,7 +459,7 @@ TEST(IsLegalTest, IllegalDifferentQuantitySequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -472,7 +472,7 @@ TEST(IsLegalTest, IllegalEqualSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -482,7 +482,7 @@ TEST(IsLegalTest, IllegalEqualSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -495,7 +495,7 @@ TEST(IsLegalTest, IllegalEqualSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -505,7 +505,7 @@ TEST(IsLegalTest, IllegalEqualSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -518,7 +518,7 @@ TEST(IsLegalTest, IllegalWeakSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -528,7 +528,7 @@ TEST(IsLegalTest, IllegalWeakSequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -541,7 +541,7 @@ TEST(IsLegalTest, IllegalWeakSequenceRev) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0},
@@ -551,7 +551,7 @@ TEST(IsLegalTest, IllegalWeakSequenceRev) {
       {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -559,7 +559,7 @@ TEST(IsLegalTest, IllegalWeakSequenceRev) {
 
 TEST(IsLegalTest, EmptyTable) {
   uecda::common::CommunicationBody table_cards = {};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -569,7 +569,7 @@ TEST(IsLegalTest, EmptyTable) {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -582,7 +582,7 @@ TEST(IsLegalTest, LegalPass) {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -605,7 +605,7 @@ TEST(IsLegalTest, IllegalDifferentHandType) {
       {0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -615,7 +615,7 @@ TEST(IsLegalTest, IllegalDifferentHandType) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -628,7 +628,7 @@ TEST(IsLegalTest, LegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -638,7 +638,7 @@ TEST(IsLegalTest, LegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -651,7 +651,7 @@ TEST(IsLegalTest, IllegalAgainstSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -661,7 +661,7 @@ TEST(IsLegalTest, IllegalAgainstSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -674,7 +674,7 @@ TEST(IsLegalTest, IllegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -684,7 +684,7 @@ TEST(IsLegalTest, IllegalSingleJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -697,7 +697,7 @@ TEST(IsLegalTest, LegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -707,7 +707,7 @@ TEST(IsLegalTest, LegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_TRUE(my_hand.isLegal(table, table_hand));
@@ -720,7 +720,7 @@ TEST(IsLegalTest, IllegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand table_hand = Hand(table_cards);
+  Hand table_hand = Hand(Hand::communicationBody2Hand(table_cards));
   uecda::common::CommunicationBody my_cards = {{
       {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -730,7 +730,7 @@ TEST(IsLegalTest, IllegalSpade3) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand my_hand = Hand(my_cards);
+  Hand my_hand = Hand(Hand::communicationBody2Hand(my_cards));
   Table table = Table(my_cards);
 
   EXPECT_FALSE(my_hand.isLegal(table, table_hand));
@@ -743,7 +743,7 @@ TEST(GetSummaryTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(src);
+  Hand hand = Hand(Hand::communicationBody2Hand(src));
   HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(2, summary.quantity);
@@ -760,7 +760,7 @@ TEST(GetSummaryTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(src);
+  Hand hand = Hand(Hand::communicationBody2Hand(src));
   HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(2, summary.quantity);
@@ -777,7 +777,7 @@ TEST(GetSummaryTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(src);
+  Hand hand = Hand(Hand::communicationBody2Hand(src));
   HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(4, summary.quantity);
@@ -794,7 +794,7 @@ TEST(GetSummaryTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(src);
+  Hand hand = Hand(Hand::communicationBody2Hand(src));
   HandSummary summary = hand.getSummary();
 
   EXPECT_EQ(4, summary.quantity);
@@ -939,7 +939,7 @@ TEST(PutCardsTest, Pair) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(dst);
+  Hand hand = Hand(Hand::communicationBody2Hand(dst));
   uecda::common::CommunicationBody result = {};
   hand.putCards(result);
 
@@ -957,7 +957,7 @@ TEST(PutCardsTest, PairWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(dst);
+  Hand hand = Hand(Hand::communicationBody2Hand(dst));
   uecda::common::CommunicationBody result = {};
   hand.putCards(result);
 
@@ -975,7 +975,7 @@ TEST(PutCardsTest, Sequence) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(dst);
+  Hand hand = Hand(Hand::communicationBody2Hand(dst));
   uecda::common::CommunicationBody result = {};
   hand.putCards(result);
 
@@ -993,7 +993,7 @@ TEST(PutCardsTest, SequenceWithJoker) {
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}}};
-  Hand hand = Hand(dst);
+  Hand hand = Hand(Hand::communicationBody2Hand(dst));
   uecda::common::CommunicationBody result = {};
   hand.putCards(result);
 

@@ -50,7 +50,7 @@ TEST(SelectHandTest, Game100) {
       if (table.is_start_of_trick) {
         table_hand = Hand();
       } else {
-        table_hand = Hand(table_body);
+        table_hand = Hand(Hand::communicationBody2Hand(table_body));
       }
 
       /* 手の候補を作る */
@@ -81,7 +81,7 @@ TEST(SelectHandTest, Game100) {
       std::cout << submission_body;
 
       /* ジョーカーを含む場合、ジョーカー以外の位置でみる */
-      if (submission_hand.getSummary().has_joker && Hand(dst_body).getSummary().has_joker) {
+      if (submission_hand.getSummary().has_joker && Hand(Hand::communicationBody2Hand(dst_body)).getSummary().has_joker) {
         for (int i = 0; i < 8; i++) {
           for (int j = 0; j < 15; j++) {
             if (dst_body[i][j] == 2) {

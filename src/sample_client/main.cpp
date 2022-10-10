@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
         /* 手札・場の手を作る */
 
         Cards my_cards{Cards::communicationBody2Cards(dealt_body)};
-        Hand table_hand{table.is_start_of_trick ? Hand() : Hand(table_body)};
+        Hand table_hand{table.is_start_of_trick ? Hand() : Hand(Hand::communicationBody2Hand(table_body))};
 
         /* 手の候補を作る */
         std::vector<Hand> hands{};

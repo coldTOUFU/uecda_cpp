@@ -47,7 +47,8 @@ void uecda::Hand::pushHands(const Cards &src, std::vector<Hand>& hand_vec) {
     /* ジョーカー単騎 */
     const Cards::bitcards c{};
     const Cards::bitcards j{(Cards::bitcards)1};
-    hand_vec.push_back(Hand(c, j));
+    const HandSummary hs{Hand::summarize(c, j)};
+    hand_vec.push_back(Hand(c, j, hs));
 
     for (int pair_qty = 2; pair_qty <= 4; pair_qty++) {
       Hand::pushPairWithJoker(src_bit, hand_vec, pair_qty);
@@ -77,7 +78,8 @@ void uecda::Hand::pushLegalHands(const Cards& src, std::vector<Hand>& hand_vec, 
       if (table_hand.getSummary().quantity == 1) {
         const Cards::bitcards c{};
         const Cards::bitcards j{(Cards::bitcards)1};
-        tmp_hand_vec.push_back(Hand(c, j));
+        const HandSummary hs{Hand::summarize(c, j)};
+        tmp_hand_vec.push_back(Hand(c, j, hs));
       } else {
         Hand::pushPairWithJoker(src_bit, tmp_hand_vec, table_hand.getSummary().quantity);
       }
@@ -152,7 +154,7 @@ uecda::HandSummary uecda::Hand::summarize(const Cards::bitcards src, const Cards
 
   /* パスのサマリ。 */
   if (src_card.quantity() == 0 && joker_src_card.quantity() == 0) {
-    return {0, true, 0, 0, 0, 0, 0};
+    return {};
   }
 
   const Cards::bitcards w_ord{std::max(src_card.weakestOrder(), joker_src_card.weakestOrder())};
@@ -197,7 +199,8 @@ void uecda::Hand::pushPair(const Cards::bitcards src, std::vector<Hand> &hand_ve
       const Cards::bitcards tmpfilter{Hand::kPairFilters.at(pair_qty - 1).at(i) << j};
       if ((src & tmpfilter) == tmpfilter) {
         const Cards::bitcards j{};
-        hand_vec.push_back(Hand(tmpfilter, j));
+        const HandSummary hs{Hand::summarize(tmpfilter, j)};
+        hand_vec.push_back(Hand(tmpfilter, j, hs));
       }
     }
   }
@@ -212,7 +215,8 @@ void uecda::Hand::pushPairWithJoker(const Cards::bitcards src, std::vector<Hand>
       if (Cards::count(src & tmpfilter) == pair_qty - 1) {
         const Cards::bitcards c{src & tmpfilter};
         const Cards::bitcards j{~src & tmpfilter};
-        hand_vec.push_back(Hand(c, j));
+        const HandSummary hs{Hand::summarize(c, j)};
+        hand_vec.push_back(Hand(c, j, hs));
       }
     }
   }
@@ -228,7 +232,8 @@ void uecda::Hand::pushSequence(const Cards::bitcards src, std::vector<Hand> &han
       const Cards::bitcards tmpfilter{Hand::kSequenceFilters.at(seq_qty - 1) << (15 * i + j)};
       if((src & tmpfilter) == tmpfilter) { 
         const Cards::bitcards j{};
-        hand_vec.push_back(Hand(tmpfilter, j));
+        const HandSummary hs{Hand::summarize(tmpfilter, j)};
+        hand_vec.push_back(Hand(tmpfilter, j, hs));
       }
     }
   }
@@ -245,7 +250,8 @@ void uecda::Hand::pushSequenceWithJoker(const Cards::bitcards src, std::vector<H
       if (Cards::count(src & tmpfilter) == seq_qty - 1) {
         const Cards::bitcards c{src & tmpfilter};
         const Cards::bitcards j{~src & tmpfilter};
-        hand_vec.push_back(Hand(c, j));
+        const HandSummary hs{Hand::summarize(c, j)};
+        hand_vec.push_back(Hand(c, j, hs));
       }
     }
   }

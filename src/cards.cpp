@@ -25,7 +25,7 @@ uecda::Cards uecda::Cards::communicationBody2Cards(const uecda::common::Communic
 }
 
 int uecda::Cards::getSuits() const {
-  bitcards tmp{this->cards_};
+  bitcards tmp{cards_};
   tmp &= (bitcards)0xfffffffffffffff; // Jokerをビット列から落とす。
 
   int s{0};
@@ -41,7 +41,7 @@ int uecda::Cards::getSuits() const {
 }
 
 int uecda::Cards::quantity() const {
-  return this->count(this->cards_);
+  return this->count(cards_);
 }
 
 int uecda::Cards::count(const bitcards src) {
@@ -68,7 +68,7 @@ int uecda::Cards::count(const bitcards src) {
 }
 
 uecda::Cards::bitcards uecda::Cards::weakestOrder() const {
-  bitcards tmp{this->cards_};
+  bitcards tmp{cards_};
   tmp &= (bitcards)0xfffffffffffffff; // Jokerをビット列から落とす。
 
   /*
@@ -92,7 +92,7 @@ uecda::Cards::bitcards uecda::Cards::weakestOrder() const {
 }
 
 uecda::Cards::bitcards uecda::Cards::strongestOrder() const {
-  bitcards tmp{this->cards_};
+  bitcards tmp{cards_};
   tmp &= (bitcards)0xfffffffffffffff; // Jokerをビット列から落とす。
 
   /*
@@ -108,7 +108,7 @@ uecda::Cards::bitcards uecda::Cards::strongestOrder() const {
 }
 
 void uecda::Cards::putCards(uecda::common::CommunicationBody &dst) const {
-  bitcards src{this->cards_};
+  bitcards src{cards_};
 
   /* Joker以外の各札。 */
   for (int i = 3; i >= 0; i--) {

@@ -2,30 +2,30 @@
 
 bool uecda::Hand::isLegal(const Table &tbl, const Hand &table_hand) const {
   if (tbl.is_start_of_trick) { return true; }
-  if (this->summary_.is_pass) { return true; }
+  if (summary_.is_pass) { return true; }
 
   const HandSummary table_hand_summary{table_hand.getSummary()};
 
   /* ジョーカー1枚出しは最強。 */
-  if (this->summary_.quantity == 1 && table_hand_summary.quantity == 1 && this->summary_.has_joker) { return true; }
+  if (summary_.quantity == 1 && table_hand_summary.quantity == 1 && summary_.has_joker) { return true; }
 
   /* 相手がジョーカー1枚出しなら、スぺ3返し以外はできない。 */
   if (table_hand_summary.quantity == 1 && table_hand_summary.has_joker) {
-    return this->summary_.quantity == 1 && this->cards_.filterCards(Cards::S3) != (Cards::bitcards)0;
+    return summary_.quantity == 1 && cards_.filterCards(Cards::S3) != (Cards::bitcards)0;
   }
 
   /* 場と同じ種類の手である必要がある。 */
-  if (this->summary_.is_sequence != table_hand_summary.is_sequence)  { return false; }
+  if (summary_.is_sequence != table_hand_summary.is_sequence)  { return false; }
 
   /* 場のカードと同枚数である必要がある。 */
-  if (this->summary_.quantity != table_hand_summary.quantity) { return false; }
+  if (summary_.quantity != table_hand_summary.quantity) { return false; }
 
   /* 出すカードの最弱が場のカードの最強より強い必要がある。 */
-  if (!tbl.is_rev && !isFormerStronger(tbl.is_rev, this->summary_.weakest_order, table_hand_summary.strongest_order)) { return false; }
-  if (tbl.is_rev && !isFormerStronger(tbl.is_rev, this->summary_.strongest_order, table_hand_summary.weakest_order)) { return false; }
+  if (!tbl.is_rev && !isFormerStronger(tbl.is_rev, summary_.weakest_order, table_hand_summary.strongest_order)) { return false; }
+  if (tbl.is_rev && !isFormerStronger(tbl.is_rev, summary_.strongest_order, table_hand_summary.weakest_order)) { return false; }
 
   /* しばりなら、スートが一致する必要がある。 */
-  if (tbl.is_lock && this->summary_.suits != table_hand_summary.suits) { return false; }
+  if (tbl.is_lock && summary_.suits != table_hand_summary.suits) { return false; }
 
   return true;
 }
@@ -95,8 +95,8 @@ void uecda::Hand::pushLegalHands(const Cards& src, std::vector<Hand>& hand_vec, 
 }
 
 void uecda::Hand::putCards(uecda::common::CommunicationBody& dst) const {
-  Cards::bitcards src{this->cards_.toBitcards()};
-  Cards::bitcards src_joker{this->joker_.toBitcards()};
+  Cards::bitcards src{cards_.toBitcards()};
+  Cards::bitcards src_joker{joker_.toBitcards()};
 
   for (int i = 3; i >= 0; i--) {
     for (int j = 14; j >= 0; j--) {

@@ -87,13 +87,13 @@ namespace uecda {
     constexpr Cards() {}
 
     /* ビットカードから生成。 */
-    constexpr Cards(const bitcards src) { this->cards_ = src; }
+    constexpr Cards(const bitcards src) { cards_ = src; }
 
     /* 与えられたビットカードの枚数を返す。 */
     static int count(const bitcards src);
 
     /* カードを返す。 */
-    constexpr bitcards toBitcards() const { return this->cards_; }
+    constexpr bitcards toBitcards() const { return cards_; }
 
     /* カードに含まれるスートを4bit形式で返す。 */
     int getSuits() const;
@@ -102,7 +102,7 @@ namespace uecda {
     int quantity() const;
 
     /* ジョーカーが含まれるか否かを返す。 */
-    constexpr bool hasJoker() const { return (this->cards_ >> 60) == 1; }
+    constexpr bool hasJoker() const { return (cards_ >> 60) == 1; }
 
     /* 最弱のカードを15bit形式で返す。 */
     bitcards weakestOrder() const;
@@ -112,7 +112,7 @@ namespace uecda {
 
     /* カードを1つずつに分ける */
     std::vector<Cards> devideIntoOneCards() {
-      bitcards src{this->cards_};
+      bitcards src{cards_};
       bitcards cur{(bitcards)1};
       std::vector<Cards> result{};
     
@@ -168,7 +168,7 @@ namespace uecda {
     constexpr bitcards filterCards(const bitcards filter) const { return (cards_ & filter); }
 
     /* ジョーカーを除く。ジョーカーはワイルドカードでどかしづらいため。 */
-    constexpr void deleteJoker() { this->cards_ ^= JOKER; }
+    constexpr void deleteJoker() { cards_ ^= JOKER; }
 
    private:
     bitcards cards_{};

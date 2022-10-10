@@ -29,7 +29,7 @@ namespace uecda {
     bool isLegal(const Table& tbl, const Hand& table_hand) const;
 
     /* 手のサマリを返す。 */
-    HandSummary getSummary() const { return this->summary_; }
+    HandSummary getSummary() const { return summary_; }
 
     /* 与えられたベクターに、与えられたカードから生成できる手をすべて追加する。パスは除く。 */
     static void pushHands(const Cards& src, std::vector<Hand>& hand_vec);
@@ -39,17 +39,17 @@ namespace uecda {
 
     /* ジョーカー以外のカードを返す。 */
     Cards getCards() const {
-      return this->cards_;
+      return cards_;
     }
 
     /* ジョーカーを返す。 */
     Cards getJoker() const {
-      return this->joker_;
+      return joker_;
     }
 
     /* ジョーカーを含むカードを返す。ジョーカーの位置は特定できない。 */
     Cards getWholeBitcards() const {
-      return this->cards_ + this->joker_;
+      return cards_ + joker_;
     }
 
     /* 革命を起こせる？ */
